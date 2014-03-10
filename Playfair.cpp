@@ -196,12 +196,7 @@ std::string Playfair::decrypt(const std::string& ciphertext) {
   decrypted_ciphertext = restoreNonEnglishLetters(decrypted_ciphertext);
 
   // BUG
-  // If the plaintext is set or encrypted previously, the plaintext is stored in
-  // the member variable. we use this information to restore the coresponding
-  // upper- and lower-case letters in the decrypted ciphertext. What if the
-  // plaintext in member variable does not match the corresponding decrypted
-  // ciphertext? such as different length or content. Currently, we have only
-  // set up a guard on checking lengths in restoreCase member function.
+  // restore the corresponding upper- and lower-case
   if (plaintext.empty() == false) {
     decrypted_ciphertext = restoreCase(decrypted_ciphertext);
   }
@@ -415,7 +410,6 @@ std::string Playfair::dropFillers(const std::string& text) const {
  *
  * @param my_character - target character
  */
-//BUG
 std::pair<int, int> Playfair::locateCharacter(char my_character) const {
   using namespace std;
 
