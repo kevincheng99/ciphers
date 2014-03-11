@@ -1,7 +1,5 @@
 #include "Vigenere.h"
 #include <stdlib.h>	
-#include <iostream>
-using namespace std;
 
 /**
  * Sets the key to use
