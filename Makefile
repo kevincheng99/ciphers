@@ -7,38 +7,31 @@
 # DESCRIPTION
 #		To better comprehend the classical ciphers, we implemented five classical
 #		ciphers, including Playfair, Row Transposition, Railfence, Vigenre and
-#		Caesar. This Makefile would compile and link the Boost testing codes for
-#		each classical ciphers. Thus, it is very suitable to perform whitebox
-#		testing on each one of classical ciphers. 
+#		Caesar.
 #
-
 
 
 CC = g++
 CFLAG = -Wall -g
-LDFLAG = -lboost_unit_test_framework
 
 all: cipher
 
-cipher:	cipher.o Playfair.o Caesar.o Vigenere.o
+cipher: cipher.o Playfair.o Caesar.o Vigenere.o
 	$(CC) $(CFLAG) cipher.o Playfair.o Caesar.o Vigenere.o -o cipher
 
-cipher.o:	cipher.cpp
+cipher.o: cipher.cpp
 	$(CC) $(CFLAG)  -c cipher.cpp 
 
-test_playfair: Playfair_test.cpp Playfair.o
-	$(CC) $(CFLAG) -o test_playfair Playfair_test.cpp Playfair.o $(LDFLAG)
-
-Playfair.o:	Playfair.cpp Playfair.h CipherInterface.h
+Playfair.o: Playfair.cpp Playfair.h CipherInterface.h
 	$(CC) $(CFLAG) -c Playfair.cpp
 
-Caesar.o:	Caesar.cpp Caesar.h CipherInterface.h
+Caesar.o: Caesar.cpp Caesar.h CipherInterface.h
 	$(CC) $(CFLAG) -c Caesar.cpp
 	
-Vigenere.o:	Vigenere.cpp Vigenere.h CipherInterface.h
+Vigenere.o: Vigenere.cpp Vigenere.h CipherInterface.h
 	$(CC) $(CFLAG) -c Vigenere.cpp
 
 .PHONY: clean
 clean:
-	rm *.o cipher test_playfair
+	rm *.o cipher 
 
