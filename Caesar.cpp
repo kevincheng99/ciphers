@@ -20,19 +20,19 @@ bool Caesar::setKey(const string& key)
  * @param plaintext - the plaintext string
  * @return - the encrypted ciphertext string
  * Equation (ASCII): c - 'A' + n % 26 + 'A'
- */
+ */	
 string Caesar::encrypt(const string& plaintext)
 { 
 	string ciphertext = "";
 	for (unsigned int i = 0; i < plaintext.size()-1; i++)
 	{
-		if (isupper(str.at(i)))
+		if (isupper(plaintext.at(i)))
 		{
-			ciphertext.push_back((str.at(i) - 'A' + key) % 26 + 'A');
+			ciphertext.push_back((plaintext.at(i) - 'A' + key) % 26 + 'A');
 		}
 		else
 		{
-			ciphertext.push_back((str.at(i) - 'a' + key) % 26 + 'a');
+			ciphertext.push_back((plaintext.at(i) - 'a' + key) % 26 + 'a');
 		}
 	}
 	
@@ -49,16 +49,15 @@ string Caesar::decrypt(const string& cipherText)
 	string plaintext = "";
 	for (unsigned int i = 0; i < cipherText.size()-1; i++)
 	{
-		if (isupper(str.at(i)))
+		if (isupper(cipherText.at(i)))
 		{
-			plaintext.push_back((str.at(i) - 'A' - key) % 26 + 'A');
+			plaintext.push_back((cipherText.at(i) - 'A' - key) % 26 + 'A');
 		}
 		else
 		{
-			plaintext.push_back((str.at(i) - 'a' - key) % 26 + 'a');
+			plaintext.push_back((cipherText.at(i) - 'a' - key) % 26 + 'a');
 		}
 	}
 	
 	return plaintext; 
 }
-
