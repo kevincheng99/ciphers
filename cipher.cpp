@@ -29,11 +29,11 @@ exit(-1);
 
 /* Set the encryption key */
 
-cipher->setKey("abc");
+cipher->setKey("Gofman");
 cout << "Vigenere Cipher" << endl; 
 
 /* Perform encryption */
-string cipherText = cipher->encrypt("abc");
+string cipherText = cipher->encrypt("KevinEnjoysEncryption");
 
   cout << "ciphertext: " << cipherText << endl;
 

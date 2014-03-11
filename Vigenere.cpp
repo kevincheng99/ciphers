@@ -65,7 +65,7 @@ string Vigenere::decrypt(const string& cipherText)
 { 
 	string plaintext = "";
 	
-	// Make the key and plaintext string to all lowercase
+	// Make the key and cipherText string to all lowercase
 	string lowerkey, lowerctext = "";
 	
 	for (unsigned int i = 0; i < key.size(); i++)
@@ -80,13 +80,11 @@ string Vigenere::decrypt(const string& cipherText)
 	
 	char base; // This is the starting base ASCII for each char of the key
 	
-	// Iterate through each char of the key, set each one as base and use that to encrypt
+	// Iterate through each char of the key, set each one as base and use that to decrypt
 	for (unsigned int i = 0; i < lowerctext.size(); i++)
 	{
-		base = key.at(i % key.size()); // Use modulus to loop through the key string
-		plaintext.push_back(( ( (26 - lowerctext.at(i) - 'a') % 26 ) - base - 'a') % 26 + 'a');
-		
-		cout << "base: " << base << " lowerptext: " << lowerctext.at(i) << " plainw: " << plaintext << endl;
+		base = lowerkey.at(i % lowerkey.size()); // Use modulus to loop through the key string
+		plaintext.push_back(((26 + lowerctext.at(i) - 'a') - (base - 'a')) % 26 + 'a');
 	}
 	
 	return plaintext; 
