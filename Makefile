@@ -20,8 +20,8 @@ LDFLAG = -lboost_unit_test_framework
 
 all: cipher
 
-cipher:	cipher.o Playfair.o Caesar.o
-	$(CC) $(CFLAG) cipher.o Playfair.o Caesar.o -o cipher
+cipher:	cipher.o Playfair.o Caesar.o Vigenere.o
+	$(CC) $(CFLAG) cipher.o Playfair.o Caesar.o Vigenere.o -o cipher
 
 cipher.o:	cipher.cpp
 	$(CC) $(CFLAG)  -c cipher.cpp 
@@ -34,6 +34,9 @@ Playfair.o:	Playfair.cpp Playfair.h CipherInterface.h
 
 Caesar.o:	Caesar.cpp Caesar.h CipherInterface.h
 	$(CC) $(CFLAG) -c Caesar.cpp
+	
+Vigenere.o:	Vigenere.cpp Vigenere.h CipherInterface.h
+	$(CC) $(CFLAG) -c Vigenere.cpp
 
 .PHONY: clean
 clean:
