@@ -1,64 +1,42 @@
+#include <string>
+#include "CipherInterface.h"
+#include "Playfair.h"
 #include "Caesar.h"
-#include <stdlib.h>		
+
+using namespace std;
+
+int main(int argc, char** argv)
+{
+/* REPLACE THIS PART WITH YOUR CODE
+* THE CODE BELOW IS A SAMPLE TO
+* ILLUSTRATE INSTANTIATION OF CLASSES
+* THAT USE THE SAME INTERFACE.
+*/	
 
 
-/**
- * Sets the key to use
- * @param key - the key to use
- * @return - True if the key is valid and False otherwise
- */
-bool Caesar::setKey(const string& key)
-{ 
-	return (!key.empty() && atoi(key.c_str()) > -1 && atoi(key.c_str()) < 26);
+/* Create an instance of the Playfair cipher */	
+CipherInterface* cipher = new Caesar();
+
+/* Error checks */
+if(!cipher)
+{
+fprintf(stderr, "ERROR [%s %s %d]: could not allocate memory\n",	
+__FILE__, __FUNCTION__, __LINE__);
+exit(-1);
 }
 
+/* Set the encryption key */
+cipher->setKey("security");
 
+/* Perform encryption */
+string cipherText = cipher->encrypt("hello world");
 
+  //cout << "ciphertext: " << cipherText << endl;
 
-/**	
- * Encrypts a plaintext string
- * @param plaintext - the plaintext string
- * @return - the encrypted ciphertext string
- * Equation (ASCII): c - 'A' + n % 26 + 'A'
- */
-string Caesar::encrypt(const string& plaintext)
-{ 
-	string ciphertext = "";
-	for (unsigned int i = 0; i < plaintext.size()-1; i++)
-	{
-		if (isupper(str.at(i)))
-		{
-			ciphertext.push_back((str.at(i) - 'A' + key) % 26 + 'A');
-		}
-		else
-		{
-			ciphertext.push_back((str.at(i) - 'a' + key) % 26 + 'a');
-		}
-	}
-	
-	return ciphertext; 
+/* Perform decryption */
+string decrypted_ciphertext = cipher->decrypt(cipherText);
+
+  //cout << "decrypted ciphertext: " << decrypted_ciphertext << endl;
+
+return 0;
 }
-
-/**
- * Decrypts a string of ciphertext
- * @param cipherText - the ciphertext
- * @return - the plaintext
- */
-string Caesar::decrypt(const string& cipherText) 
-{ 
-	string plaintext = "";
-	for (unsigned int i = 0; i < cipherText.size()-1; i++)
-	{
-		if (isupper(str.at(i)))
-		{
-			plaintext.push_back((str.at(i) - 'A' - key) % 26 + 'A');
-		}
-		else
-		{
-			plaintext.push_back((str.at(i) - 'a' - key) % 26 + 'a');
-		}
-	}
-	
-	return plaintext; 
-}
-
