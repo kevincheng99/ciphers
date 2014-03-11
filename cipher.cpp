@@ -1,7 +1,8 @@
 #include <string>
 #include "CipherInterface.h"
-#include "Playfair.h"
+//#include "Playfair.h"
 #include "Caesar.h"
+#include <iostream>
 
 using namespace std;
 
@@ -26,17 +27,19 @@ exit(-1);
 }
 
 /* Set the encryption key */
-cipher->setKey("security");
+
+int cipherkey = cipher->setKey("3");
+cout << "Caesar Cipher" << endl; 
 
 /* Perform encryption */
-string cipherText = cipher->encrypt("hello world");
+string cipherText = cipher->encrypt("KevinIsAwesomeXYZ");
 
-  //cout << "ciphertext: " << cipherText << endl;
+  cout << "ciphertext: " << cipherText << endl;
 
 /* Perform decryption */
 string decrypted_ciphertext = cipher->decrypt(cipherText);
 
-  //cout << "decrypted ciphertext: " << decrypted_ciphertext << endl;
+  cout << "decrypted ciphertext: " << decrypted_ciphertext << endl;
 
 return 0;
 }

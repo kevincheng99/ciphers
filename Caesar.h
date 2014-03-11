@@ -1,7 +1,6 @@
 #ifndef CAESAR_H
 #define CAESAR_H
 
-#include <vector>   /* For vectors */
 #include <string>   /* For C++ strings */
 #include <stdio.h>  /* For standard I/O */
 #include <stdlib.h> /* For miscellenous C functions */

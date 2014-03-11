@@ -18,7 +18,7 @@ CC = g++
 CFLAG = -Wall -g
 LDFLAG = -lboost_unit_test_framework
 
-all: cipher test_playfair
+all: cipher
 
 cipher:	cipher.o Playfair.o Caesar.o
 	$(CC) $(CFLAG) cipher.o Playfair.o Caesar.o -o cipher
