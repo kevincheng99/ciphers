@@ -9,16 +9,16 @@
 
 Playfair::Playfair():kVectorLength(5),
                      kStringLength(5),
-                     user_key(""),
-                     plaintext("") {
+                     user_key("") {
+                     //plaintext("") {
   // do nothing
 }
 
 Playfair::Playfair(const std::string& my_key ):
               kVectorLength(5),
               kStringLength(5),
-              user_key(my_key),
-              plaintext("") {
+              user_key(my_key) {
+              //plaintext("") {
   // set the key matrix
   setKey(user_key);
 }
@@ -57,7 +57,7 @@ bool Playfair::setKey(const std::string& key) {
     key_matrix.push_back(processed_key.substr(5 * i, kStringLength)); 
   }
 
-	return false;  
+	return true;  
 }
 
 /**	
@@ -69,19 +69,27 @@ std::string Playfair::encrypt(const std::string& myplaintext) {
   using namespace std;
 
   // save the plaintext
-  setPlaintext(myplaintext);
+  //setPlaintext(myplaintext);
 
   // extract non-english letters
-  string english_only_text = extractNonEnglishLetters(myplaintext);
+  //string english_only_text = extractNonEnglishLetters(myplaintext);
 
   // convert the plaintext to upper-case
+  //string processed_plaintext = "";
+
+  //transform(english_only_text.begin(),
+  //          english_only_text.end(),
+  //          back_inserter(processed_plaintext),
+  //          ::toupper);
+  
   string processed_plaintext = "";
 
-  transform(english_only_text.begin(),
-            english_only_text.end(),
+  transform(myplaintext.begin(),
+            myplaintext.end(),
             back_inserter(processed_plaintext),
             ::toupper);
  
+
   // pad plaintext 
   char filler = 'X';
 
@@ -137,7 +145,6 @@ std::string Playfair::encrypt(const std::string& myplaintext) {
     }
   }
 
-  //return ""; 
   return ciphertext;
 }
 
@@ -193,13 +200,13 @@ std::string Playfair::decrypt(const std::string& ciphertext) {
 
   // BUG
   // restore the non-English characters
-  decrypted_ciphertext = restoreNonEnglishLetters(decrypted_ciphertext);
+  //decrypted_ciphertext = restoreNonEnglishLetters(decrypted_ciphertext);
 
   // BUG
   // restore the corresponding upper- and lower-case
-  if (plaintext.empty() == false) {
-    decrypted_ciphertext = restoreCase(decrypted_ciphertext);
-  }
+  //if (plaintext.empty() == false) {
+  //  decrypted_ciphertext = restoreCase(decrypted_ciphertext);
+  //}
 
 	return decrypted_ciphertext; 
 }
@@ -226,10 +233,11 @@ bool Playfair::validateKey() const {
        itr != user_key.end();
        itr++) {
     if (isupper(*itr) == false && islower(*itr) == false) {
-      cerr << "ERROR: key has to be in ASCII" << endl;
+      cerr << "ERROR: key has to be English letters in ASCII" << endl;
       return false;
     }
   }
+
   return true;
 }
 
@@ -497,6 +505,7 @@ char Playfair::circularShift(char target_character,
  * The member function restores the upper- and lower-case in the decrypted
  * ciphertext
  */
+/*
 std::string Playfair::restoreCase(const std::string& decrypted_text) const {
   using namespace std;
 
@@ -528,6 +537,7 @@ std::string Playfair::restoreCase(const std::string& decrypted_text) const {
 
   return restored_text;
 }
+*/
 
 /**
  * The member function prints the key matrix to the file. It is the caller's
@@ -552,6 +562,7 @@ void Playfair::printMatrix(FILE* fp) const {
 /**
  * The member function extract Non-english letters from the text
  */
+/*
 std::string Playfair::extractNonEnglishLetters(const std::string& text) {
   using namespace std;
 
@@ -575,12 +586,13 @@ std::string Playfair::extractNonEnglishLetters(const std::string& text) {
 
   return processed_text;
 }
-
+*/
 
 /**
  * The member function restores non-english letters to the decrypted
  * ciphertext.
  */
+/*
 std::string Playfair::restoreNonEnglishLetters(const string& text) {
   using namespace std;
 
@@ -596,7 +608,7 @@ std::string Playfair::restoreNonEnglishLetters(const string& text) {
 
   return processed_text;
 }
-
+*/
 
 
 

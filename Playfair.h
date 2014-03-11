@@ -96,18 +96,18 @@ class Playfair: public CipherInterface
     /**
      * The member function restore the case of decrypted ciphertext
      */
-    string restoreCase(const string& decrypted_text) const;
+    //string restoreCase(const string& decrypted_text) const;
 
     /**
      * The member function extracts Non-english letters from the text
      */
-    string extractNonEnglishLetters(const string& text);
+    //string extractNonEnglishLetters(const string& text);
     
     /**
      * The member function restores non-english letters to the decrypted
      * ciphertext.
      */
-    string restoreNonEnglishLetters(const string& text);
+    //string restoreNonEnglishLetters(const string& text);
 
     /**
      * getters and setters
@@ -118,11 +118,11 @@ class Playfair: public CipherInterface
     
     inline vector<string> getKeyMatrix() const {return key_matrix;}
     
-    inline string getPlaintext() {return plaintext;}
+    //inline string getPlaintext() {return plaintext;}
     
-    inline void setPlaintext(const string& my_plaintext) {
-      plaintext = my_plaintext;
-    }
+    //inline void setPlaintext(const string& my_plaintext) {
+    //  plaintext = my_plaintext;
+    //}
 
     vector<unsigned int> setPaddingLocation(const string& text);
     
@@ -131,19 +131,19 @@ class Playfair: public CipherInterface
     }
     
     //inline string getCiphertext() {return ciphertext;}
-    inline vector<pair<size_t, char> > getNonEnglishLetterLocation() {
-      return nonenglish_letter_location;
-    }
+    //inline vector<pair<size_t, char> > getNonEnglishLetterLocation() {
+    //  return nonenglish_letter_location;
+    //}
  
   /* The protected members */
 	protected:
     const int kVectorLength;
     const int kStringLength;
     vector<unsigned int> padding_location;
-    vector<pair<size_t, char> > nonenglish_letter_location;
-    vector<string> key_matrix;  // all upper-case
-    string user_key;    // mixed of upper- and lowr-case
-    string plaintext;
+    vector<string> key_matrix;
+    string user_key;
+    //vector<pair<size_t, char> > nonenglish_letter_location;
+    //string plaintext;
     //string ciphertext;
 
 	
