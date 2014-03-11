@@ -136,7 +136,7 @@ class Playfair: public CipherInterface
     //}
  
   /* The protected members */
-	protected:
+  protected:
     const int kVectorLength;
     const int kStringLength;
     vector<unsigned int> padding_location;
