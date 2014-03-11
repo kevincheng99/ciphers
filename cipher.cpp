@@ -26,7 +26,14 @@ string Caesar::encrypt(const string& plaintext)
 	string ciphertext = "";
 	for (unsigned int i = 0; i < plaintext.size()-1; i++)
 	{
-		ciphertext.push_back((str.at(i) - 'A' + key) % 26 + 'A');
+		if (isupper(str.at(i)))
+		{
+			ciphertext.push_back((str.at(i) - 'A' + key) % 26 + 'A');
+		}
+		else
+		{
+			ciphertext.push_back((str.at(i) - 'a' + key) % 26 + 'a');
+		}
 	}
 	
 	return ciphertext; 
@@ -42,7 +49,14 @@ string Caesar::decrypt(const string& cipherText)
 	string plaintext = "";
 	for (unsigned int i = 0; i < cipherText.size()-1; i++)
 	{
-		plaintext.push_back((str.at(i) - 'A' - key) % 26 + 'A');
+		if (isupper(str.at(i)))
+		{
+			plaintext.push_back((str.at(i) - 'A' - key) % 26 + 'A');
+		}
+		else
+		{
+			plaintext.push_back((str.at(i) - 'a' - key) % 26 + 'a');
+		}
 	}
 	
 	return plaintext; 
