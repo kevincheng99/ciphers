@@ -1,5 +1,7 @@
 #include "Vigenere.h"
 #include <stdlib.h>	
+#include <iostream>
+using namespace std;
 
 /**
  * Sets the key to use
@@ -30,7 +32,7 @@ string Vigenere::encrypt(const string& plaintext)
 	string ciphertext = "";
 		
 	// Make the key and plaintext string to all lowercase
-	string lowerkey, lowerptext;
+	string lowerkey, lowerptext = "";
 	
 	for (unsigned int i = 0; i < key.size(); i++)
 	{
@@ -48,7 +50,7 @@ string Vigenere::encrypt(const string& plaintext)
 	for (unsigned int i = 0; i < lowerptext.size(); i++)
 	{
 		base = lowerkey.at(i % lowerkey.size()); // Use modulus to loop through the key string
-		ciphertext.push_back((base - 'a' + lowerptext.at(i)) % 26 + 'a');
+		ciphertext.push_back((base - 'a' + lowerptext.at(i) - 'a') % 26 + 'a');
 	}
 	
 	return ciphertext; 
@@ -64,7 +66,7 @@ string Vigenere::decrypt(const string& cipherText)
 	string plaintext = "";
 	
 	// Make the key and plaintext string to all lowercase
-	string lowerkey, lowerctext;
+	string lowerkey, lowerctext = "";
 	
 	for (unsigned int i = 0; i < key.size(); i++)
 	{
@@ -82,7 +84,9 @@ string Vigenere::decrypt(const string& cipherText)
 	for (unsigned int i = 0; i < lowerctext.size(); i++)
 	{
 		base = key.at(i % key.size()); // Use modulus to loop through the key string
-		plaintext.push_back((base - 'a' + (26 - lowerctext.at(i))) % 26 + 'a');
+		plaintext.push_back(( ( (26 - lowerctext.at(i) - 'a') % 26 ) - base - 'a') % 26 + 'a');
+		
+		cout << "base: " << base << " lowerptext: " << lowerctext.at(i) << " plainw: " << plaintext << endl;
 	}
 	
 	return plaintext; 
