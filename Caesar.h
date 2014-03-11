@@ -43,7 +43,7 @@ class Caesar: public CipherInterface
 		
 		/* The protected members */
 	protected:
-	
+		unsigned int key;
 
 };
 
