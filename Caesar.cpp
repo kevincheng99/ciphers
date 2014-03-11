@@ -7,9 +7,14 @@
  * @param key - the key to use
  * @return - True if the key is valid and False otherwise
  */
-bool Caesar::setKey(const string& key)
-{ 
-	return (!key.empty() && atoi(key.c_str()) > -1 && atoi(key.c_str()) < 26);
+bool Caesar::setKey(const string& mykey)
+{ 	// validate the key
+	if ((!mykey.empty() && atoi(mykey.c_str()) > -1 && atoi(mykey.c_str()) < 26)) {
+		key = atoi(mykey.c_str());
+		return true;
+	}
+	else
+		return false;
 }
 
 
