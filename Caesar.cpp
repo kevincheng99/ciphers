@@ -1,4 +1,5 @@
 #include "Caesar.h"
+#include <stdlib.h>		
 
 
 /**
@@ -8,9 +9,7 @@
  */
 bool Caesar::setKey(const string& key)
 { 
-	const_iterator it = key.begin();
-    while (it != key.end() && isdigit(*it)) ++it;
-    return (!key.empty() && it == key.end());
+	return (!key.empty() && atoi(key.c_str()) > -1 && atoi(key.c_str() < 26)
 }
 
 
@@ -20,12 +19,17 @@ bool Caesar::setKey(const string& key)
  * Encrypts a plaintext string
  * @param plaintext - the plaintext string
  * @return - the encrypted ciphertext string
+ * Equation (ASCII): c - 'A' + n % 26 + 'A'
  */
 string Caesar::encrypt(const string& plaintext)
 { 
+	string ciphertext = "";
+	for (int i = 0; i < plaintext.size()-1; i++)
+	{
+		ciphertext.push_back((str.at(i) - 'A' + key) % 26 + 'A');
+	}
 	
-	
-	return ""; 
+	return ciphertext; 
 }
 
 /**
@@ -35,7 +39,11 @@ string Caesar::encrypt(const string& plaintext)
  */
 string Caesar::decrypt(const string& cipherText) 
 { 
-	return ""; 
+	string plaintext = "";
+	for (int i = 0; i < cipherText.size()-1; i++)
+	{
+		plaintext.push_back((str.at(i) - 'A' - key) % 26 + 'A');
+	}
 	
+	return plaintext; 
 }
-
