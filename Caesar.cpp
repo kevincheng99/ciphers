@@ -9,7 +9,7 @@
  */
 bool Caesar::setKey(const string& key)
 { 
-	return (!key.empty() && atoi(key.c_str()) > -1 && atoi(key.c_str() < 26)
+	return (!key.empty() && atoi(key.c_str()) > -1 && atoi(key.c_str()) < 26);
 }
 
 
@@ -24,9 +24,16 @@ bool Caesar::setKey(const string& key)
 string Caesar::encrypt(const string& plaintext)
 { 
 	string ciphertext = "";
-	for (int i = 0; i < plaintext.size()-1; i++)
+	for (unsigned int i = 0; i < plaintext.size()-1; i++)
 	{
-		ciphertext.push_back((str.at(i) - 'A' + key) % 26 + 'A');
+		if (isupper(str.at(i)))
+		{
+			ciphertext.push_back((str.at(i) - 'A' + key) % 26 + 'A');
+		}
+		else
+		{
+			ciphertext.push_back((str.at(i) - 'a' + key) % 26 + 'a');
+		}
 	}
 	
 	return ciphertext; 
@@ -40,10 +47,18 @@ string Caesar::encrypt(const string& plaintext)
 string Caesar::decrypt(const string& cipherText) 
 { 
 	string plaintext = "";
-	for (int i = 0; i < cipherText.size()-1; i++)
+	for (unsigned int i = 0; i < cipherText.size()-1; i++)
 	{
-		plaintext.push_back((str.at(i) - 'A' - key) % 26 + 'A');
+		if (isupper(str.at(i)))
+		{
+			plaintext.push_back((str.at(i) - 'A' - key) % 26 + 'A');
+		}
+		else
+		{
+			plaintext.push_back((str.at(i) - 'a' - key) % 26 + 'a');
+		}
 	}
 	
 	return plaintext; 
 }
+
