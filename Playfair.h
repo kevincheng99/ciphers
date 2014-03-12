@@ -59,7 +59,8 @@ class Playfair: public CipherInterface
     /**
      * The member function validates the key string in ASCII.
      */
-    bool validateKey() const;
+    //bool validateKey() const;
+    static bool validateKey(const string& key);
 
     /**
      * The member function removes the duplicated letter in a string while
@@ -112,9 +113,9 @@ class Playfair: public CipherInterface
     /**
      * getters and setters
      */
-    inline string getUserKey() const {return user_key;}
+    //inline string getUserKey() const {return user_key;}
 
-    inline void setUserKey(const string& my_key) {user_key = my_key;}
+    //inline void setUserKey(const string& my_key) {user_key = my_key;}
     
     inline vector<string> getKeyMatrix() const {return key_matrix;}
     
@@ -141,7 +142,7 @@ class Playfair: public CipherInterface
     const int kStringLength;
     vector<unsigned int> padding_location;
     vector<string> key_matrix;
-    string user_key;
+    //string user_key;
     //vector<pair<size_t, char> > nonenglish_letter_location;
     //string plaintext;
     //string ciphertext;

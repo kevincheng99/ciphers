@@ -8,19 +8,19 @@
 #include "Playfair.h"
 
 Playfair::Playfair():kVectorLength(5),
-                     kStringLength(5),
-                     user_key("") {
+                     kStringLength(5) {
+                     //user_key("") {
                      //plaintext("") {
   // do nothing
 }
 
 Playfair::Playfair(const std::string& my_key ):
               kVectorLength(5),
-              kStringLength(5),
-              user_key(my_key) {
+              kStringLength(5) {
+              //user_key(my_key) {
               //plaintext("") {
   // set the key matrix
-  setKey(user_key);
+  setKey(my_key);
 }
 
 /**
@@ -33,11 +33,11 @@ Playfair::Playfair(const std::string& my_key ):
 bool Playfair::setKey(const std::string& key) {
   using namespace std;
 
-  // store the user key
-  setUserKey(user_key = key);
-  
   // validate the key string
-  if (validateKey() == false) {return false;}
+  if (validateKey(key) == false) {return false;}
+
+  // store the user key
+  //setUserKey(user_key = key);
  
   // convert the key to upper-case
   // ::toupper is the toupper method in the global namespace instead of
@@ -219,7 +219,8 @@ std::string Playfair::decrypt(const std::string& ciphertext) {
  *
  * @return - True if the key is valid and False otherwise
  */
-bool Playfair::validateKey() const {
+//bool Playfair::validateKey() const {
+bool Playfair::validateKey(const string& user_key) {
   using namespace std;
   
   // check if the string is empty

@@ -16,71 +16,71 @@ using namespace std;
 BOOST_AUTO_TEST_CASE(test_validateKey1) {
   string my_key = "kevin";
   
-  Playfair playfair_cipher;
+  //Playfair playfair_cipher;
 
-  playfair_cipher.setUserKey(my_key);
+  //playfair_cipher.setUserKey(my_key);
 
-  BOOST_CHECK(playfair_cipher.validateKey() == true);
+  BOOST_CHECK(Playfair::validateKey(my_key) == true);
 }
 
 BOOST_AUTO_TEST_CASE(test_validateKey2) {
   string my_key = "KEVIN";
 
-  Playfair playfair_cipher;
+  //Playfair playfair_cipher;
 
-  playfair_cipher.setUserKey(my_key);
+  //playfair_cipher.setUserKey(my_key);
 
-  BOOST_CHECK(playfair_cipher.validateKey() == true);
+  BOOST_CHECK(Playfair::validateKey(my_key) == true);
 }
 
 BOOST_AUTO_TEST_CASE(test_validateKey3) {
   string my_key = "KeViN";
 
-  Playfair playfair_cipher;
+  //Playfair playfair_cipher;
 
-  playfair_cipher.setUserKey(my_key);
+  //playfair_cipher.setUserKey(my_key);
 
-  BOOST_CHECK(playfair_cipher.validateKey() == true);
+  BOOST_CHECK(Playfair::validateKey(my_key) == true);
 }
 
 BOOST_AUTO_TEST_CASE(test_validateKey4) {
   string my_key = "Ke8in";
  
-  Playfair playfair_cipher;
+  //Playfair playfair_cipher;
 
-  playfair_cipher.setUserKey(my_key);
+  //playfair_cipher.setUserKey(my_key);
  
-  BOOST_CHECK(playfair_cipher.validateKey() == false);
+  BOOST_CHECK(Playfair::validateKey(my_key) == false);
 }
 
 BOOST_AUTO_TEST_CASE(test_validateKey5) {
   string my_key = "Ke[in";
  
-  Playfair playfair_cipher;
+  //Playfair playfair_cipher;
 
-  playfair_cipher.setUserKey(my_key);
+  //playfair_cipher.setUserKey(my_key);
 
-  BOOST_CHECK(playfair_cipher.validateKey() == false);
+  BOOST_CHECK(Playfair::validateKey(my_key) == false);
 }
 
 BOOST_AUTO_TEST_CASE(test_validateKey6) {
   string my_key = "Ke|in";
   
-  Playfair playfair_cipher;
+  //Playfair playfair_cipher;
 
-  playfair_cipher.setUserKey(my_key);
+  //playfair_cipher.setUserKey(my_key);
 
-  BOOST_CHECK(playfair_cipher.validateKey() == false);
+  BOOST_CHECK(Playfair::validateKey(my_key) == false);
 }
 
 BOOST_AUTO_TEST_CASE(test_validateKey7) {
   string my_key = "";
   
-  Playfair playfair_cipher;
+  //Playfair playfair_cipher;
 
-  playfair_cipher.setUserKey(my_key);
+  //playfair_cipher.setUserKey(my_key);
 
-  BOOST_CHECK(playfair_cipher.validateKey() == false);
+  BOOST_CHECK(Playfair::validateKey(my_key) == false);
 }
 
 BOOST_AUTO_TEST_CASE(test_removeDuplicates1){
@@ -182,7 +182,7 @@ BOOST_AUTO_TEST_CASE(test_setKey2){
   playfair_cipher.setKey(test_key);
 
   // check the user key
-  BOOST_CHECK_EQUAL(test_key, playfair_cipher.getUserKey());
+  //BOOST_CHECK_EQUAL(test_key, playfair_cipher.getUserKey());
 
   // check the key matrix
   vector<string> test_key_matrix = playfair_cipher.getKeyMatrix();
@@ -211,7 +211,7 @@ BOOST_AUTO_TEST_CASE(test_setKey3){
   playfair_cipher.setKey(test_key);
 
   // check the user key
-  BOOST_CHECK_EQUAL(playfair_cipher.getUserKey(), test_key);
+  //BOOST_CHECK_EQUAL(playfair_cipher.getUserKey(), test_key);
 
   // check the key matrix
   vector<string> test_key_matrix = playfair_cipher.getKeyMatrix();
@@ -240,7 +240,7 @@ BOOST_AUTO_TEST_CASE(test_setKey4){
   playfair_cipher.setKey(test_key);
 
   // check the user key
-  BOOST_CHECK_EQUAL(playfair_cipher.getUserKey(), test_key);
+  //BOOST_CHECK_EQUAL(playfair_cipher.getUserKey(), test_key);
 
   // check the key matrix
   vector<string> test_key_matrix = playfair_cipher.getKeyMatrix();
@@ -269,7 +269,7 @@ BOOST_AUTO_TEST_CASE(test_setKey5){
   playfair_cipher.setKey(test_key);
 
   // check the user key
-  BOOST_CHECK_EQUAL(playfair_cipher.getUserKey(), test_key);
+  // BOOST_CHECK_EQUAL(playfair_cipher.getUserKey(), test_key);
 
   // check the key matrix
   vector<string> test_key_matrix = playfair_cipher.getKeyMatrix();
@@ -298,7 +298,7 @@ BOOST_AUTO_TEST_CASE(test_setKey6){
   playfair_cipher.setKey(test_key);
 
   // check the user key
-  BOOST_CHECK_EQUAL(playfair_cipher.getUserKey(), test_key);
+  //BOOST_CHECK_EQUAL(playfair_cipher.getUserKey(), test_key);
 
   // check the key matrix
   vector<string> test_key_matrix = playfair_cipher.getKeyMatrix();
