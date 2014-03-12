@@ -16,9 +16,9 @@ CC = g++
 CFLAG = -Wall -g
 LDFLAG = -lboost_unit_test_framework
 
-all: cipher test_playfair
+all: cipher test_playfair test_rowtransposition
 
-cipher: cipher.o Playfair.o Caesar.o Vigenere.o
+cipher: cipher.o Playfair.o Caesar.o Vigenere.o RowTransposition.o
 	$(CC) $(CFLAG) cipher.o Playfair.o Caesar.o Vigenere.o -o cipher
 
 cipher.o: cipher.cpp
@@ -33,12 +33,18 @@ Caesar.o: Caesar.cpp Caesar.h CipherInterface.h
 Vigenere.o: Vigenere.cpp Vigenere.h CipherInterface.h
 	$(CC) $(CFLAG) -c Vigenere.cpp
 
+RowTransposition.o: RowTransposition.cpp RowTransposition.h CipherInterface.h
+	$(CC) $(CFLAG) -c RowTransposition.cpp
+
 test_playfair: Playfair_test.cpp Playfair.o
 	$(CC) $(CFLAG) -o test_playfair Playfair_test.cpp Playfair.o $(LDFLAG)
+
+test_rowtransposition: RowTransposition_test.cpp RowTransposition.o
+	$(CC) $(CFLAG) -o test_rowtransposition RowTransposition_test.cpp RowTransposition.o $(LDFLAG)
 
 .PHONY: clean clean_tests
 clean:
 	rm *.o cipher 
 
 clean_test:
-	rm test_playfair
+	rm test_playfair test_rowtransposition
