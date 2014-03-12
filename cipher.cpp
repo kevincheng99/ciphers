@@ -48,7 +48,7 @@ int main(int argc, char** argv)
 
   // check the output file
   if (!output_file) {
-    perror("open outpu file");
+    perror("open output file");
     return -3;
   }
 
@@ -71,6 +71,13 @@ int main(int argc, char** argv)
 
     if (!(cipher->setKey(mykey))) {
       cerr << "invalid key: " << mykey << endl;
+      
+      // close input file stream object
+      input_file.close();
+
+      // close output file stream object
+      output_file.close();
+
       return -5;
     }
 
@@ -80,6 +87,15 @@ int main(int argc, char** argv)
       // encrypt
       // write to output file
 
+      // test to read input file
+      string input_line = "";
+      input_file >> input_line;
+      
+      while (!input_file.eof()) {
+        cout << input_line << endl;
+        input_file >> input_line;
+      }
+      
       string cipherText = cipher->encrypt("hereisanicestringcanyouseeit");
       
       cout << "ciphertext: " << cipherText << endl;
@@ -93,10 +109,20 @@ int main(int argc, char** argv)
       string decrypted_ciphertext = cipher->decrypt(cipherText);
 
       cout << "decrypted ciphertext: " << decrypted_ciphertext << endl;
+      
+      // write to the output file
+      output_file << "decrypted ciphertext: " << decrypted_ciphertext << endl;
     }
     else {
       cerr << "invalid ENC/DEC option: " << argv[kEncryptionOrDecryption];
       cerr << endl;
+            
+      // close input file stream object
+      input_file.close();
+
+      // close output file stream object
+      output_file.close();
+
       return -6;
     }
   }
@@ -126,6 +152,13 @@ int main(int argc, char** argv)
 
     if (!(cipher->setKey(mykey))) {
       cerr << "invalid key: " << mykey << endl;
+                  
+      // close input file stream object
+      input_file.close();
+
+      // close output file stream object
+      output_file.close();
+
       return -5;
     }
 
@@ -152,6 +185,13 @@ int main(int argc, char** argv)
     else {
       cerr << "invalid ENC/DEC option: " << argv[kEncryptionOrDecryption];
       cerr << endl;
+                  
+      // close input file stream object
+      input_file.close();
+
+      // close output file stream object
+      output_file.close();
+
       return -6;
     }
   }
@@ -175,7 +215,14 @@ int main(int argc, char** argv)
 
     if (!(cipher->setKey(mykey))) {
       cerr << "invalid key: " << mykey << endl;
-      return -5;
+            
+      // close input file stream object
+      input_file.close();
+
+      // close output file stream object
+      output_file.close();
+
+       return -5;
     }
 
     // encryption or decryption
@@ -201,12 +248,26 @@ int main(int argc, char** argv)
     else {
       cerr << "invalid ENC/DEC option: " << argv[kEncryptionOrDecryption];
       cerr << endl;
+                  
+      // close input file stream object
+      input_file.close();
+
+      // close output file stream object
+      output_file.close();
+
       return -6;
     }
   }
   else {
     cerr << "invalid cipher name: " << argv[kCipherName] << endl;
-    return -4;
+                
+      // close input file stream object
+      input_file.close();
+
+      // close output file stream object
+      output_file.close();
+
+      return -4;
   }
 
   // close input file stream object
