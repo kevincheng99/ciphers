@@ -68,6 +68,8 @@ bool Playfair::setKey(const std::string& key) {
 std::string Playfair::encrypt(const std::string& myplaintext) { 
   using namespace std;
 
+  // we may have to check if the plaintext is empty here or in the cipher.cpp
+
   // save the plaintext
   //setPlaintext(myplaintext);
 

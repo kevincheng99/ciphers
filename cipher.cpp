@@ -90,6 +90,8 @@ int main(int argc, char** argv)
       // test to read input file
       string input_line = "";
       input_file >> input_line;
+
+      // check if file is empty
       
       while (!input_file.eof()) {
         cout << input_line << endl;
