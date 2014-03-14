@@ -46,10 +46,10 @@ BOOST_AUTO_TEST_CASE(test_setKey1) {
   rt_cipher.setKey(key);
 
   // get the transformed key
-  vector<int> rank_key = rt_cipher.getKey();
+  vector<size_t> rank_key = rt_cipher.getKey();
 
   // check the key content
-  vector<int> expected_rank_key;
+  vector<size_t> expected_rank_key;
   expected_rank_key.push_back(2);
   expected_rank_key.push_back(0);
   expected_rank_key.push_back(4);
@@ -69,10 +69,10 @@ BOOST_AUTO_TEST_CASE(test_setKey2) {
   rt_cipher.setKey(key);
 
   // get the transformed key
-  vector<int> rank_key = rt_cipher.getKey();
+  vector<size_t> rank_key = rt_cipher.getKey();
 
   // check the key content
-  vector<int> expected_rank_key;
+  vector<size_t> expected_rank_key;
   expected_rank_key.push_back(0);
   expected_rank_key.push_back(1);
   expected_rank_key.push_back(3);
@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(test_setKey3) {
   rt_cipher.setKey(key);
 
   // get the transformed key
-  vector<int> rank_key = rt_cipher.getKey();
+  vector<size_t> rank_key = rt_cipher.getKey();
 
   // check the rank key size
   BOOST_CHECK_EQUAL(rank_key.size(), 0);
@@ -106,10 +106,10 @@ BOOST_AUTO_TEST_CASE(test_setKey4) {
   rt_cipher.setKey(key);
 
   // get the transformed key
-  vector<int> rank_key = rt_cipher.getKey();
+  vector<size_t> rank_key = rt_cipher.getKey();
 
   // check the transformed key content
-  vector<int> expected_rank_key;
+  vector<size_t> expected_rank_key;
   expected_rank_key.push_back(7);
   expected_rank_key.push_back(4);
   expected_rank_key.push_back(3);
@@ -124,6 +124,219 @@ BOOST_AUTO_TEST_CASE(test_setKey4) {
     BOOST_CHECK_EQUAL(expected_rank_key.at(i), rank_key.at(i));
   }
 }
+
+BOOST_AUTO_TEST_CASE(test_setKey5) {
+  string key = "value";
+  RowTransposition rt_cipher;
+
+  // set the key
+  rt_cipher.setKey(key);
+
+  // get the transformed key
+  vector<size_t> rank_key = rt_cipher.getKey();
+
+  // check the transformed key content
+  vector<size_t> expected_rank_key;
+  expected_rank_key.push_back(4);
+  expected_rank_key.push_back(0);
+  expected_rank_key.push_back(2);
+  expected_rank_key.push_back(3);
+  expected_rank_key.push_back(1);
+
+  for (size_t i = 0; i < expected_rank_key.size(); i++) {
+    BOOST_CHECK_EQUAL(expected_rank_key.at(i), rank_key.at(i));
+  }
+}
+BOOST_AUTO_TEST_CASE(test_padText1) {
+  // initialize the cipher
+  string key = "KEVIN";
+  RowTransposition rt_cipher(key);
+
+  //pad text
+  string text = "AB";
+  string processed_text = rt_cipher.padText(text);
+
+  //check the length processed text
+  BOOST_CHECK_EQUAL(processed_text.size(), 5);
+}
+
+BOOST_AUTO_TEST_CASE(test_padText2) {
+  // initialize the cipher
+  string key = "KEVIN";
+  RowTransposition rt_cipher(key);
+
+  //pad text
+  string text = "ABCDE";
+  string processed_text = rt_cipher.padText(text);
+
+  //check the length processed text
+  BOOST_CHECK_EQUAL(processed_text.size(), 5);
+}
+
+
+BOOST_AUTO_TEST_CASE(test_padText3) {
+  // initialize the cipher
+  string key = "KEVIN";
+  RowTransposition rt_cipher(key);
+
+  //pad text
+  string text = "ABCDEF";
+  string processed_text = rt_cipher.padText(text);
+
+  //check the length processed text
+  BOOST_CHECK_EQUAL(processed_text.size(), 10);
+}
+
+BOOST_AUTO_TEST_CASE(test_padText4) {
+  // initialize the cipher
+  string key = "KEVIN";
+  RowTransposition rt_cipher(key);
+
+  //pad text
+  string text = "";
+  string processed_text = rt_cipher.padText(text);
+
+  //check the length processed text
+  BOOST_CHECK_EQUAL(processed_text.size(), 0);
+}
+
+BOOST_AUTO_TEST_CASE(test_constructPlaintextMatrix1) {
+  // initialize the cipher
+  string key = "KEVIN";
+  string plaintext = "ABCDEFGHIJ";
+  RowTransposition rt_cipher(key);
+
+  // construct the plaintext matrix
+  vector<string> plaintext_matrix = rt_cipher.constructPlaintextMatrix(plaintext);
+
+  // check the matrix size
+  BOOST_CHECK_EQUAL(plaintext_matrix.size(), 2);
+  BOOST_CHECK_EQUAL(plaintext_matrix.at(0).length(), 5);
+  BOOST_CHECK_EQUAL(plaintext_matrix.at(1).length(), 5);
+
+  // print the matrix
+  //for (vector<string>::iterator itr = plaintext_matrix.begin();
+  //     itr != plaintext_matrix.end();
+  //     itr++) {
+  //  cout << *itr << endl;
+  //}
+}
+
+BOOST_AUTO_TEST_CASE(test_constructPlaintextMatrix2) {
+  // initialize the cipher
+  string key = "KEVIN";
+  string plaintext = "ABCDE";
+  RowTransposition rt_cipher(key);
+
+  // construct the plaintext matrix
+  vector<string> plaintext_matrix = rt_cipher.constructPlaintextMatrix(plaintext);
+
+  // check the matrix size
+  BOOST_CHECK_EQUAL(plaintext_matrix.size(), 1);
+  BOOST_CHECK_EQUAL(plaintext_matrix.at(0).length(), 5);
+
+  // print the matrix
+  //for (vector<string>::iterator itr = plaintext_matrix.begin();
+  //     itr != plaintext_matrix.end();
+  //     itr++) {
+  //  cout << *itr << endl;
+  //}
+}
+
+BOOST_AUTO_TEST_CASE(test_constructPlaintextMatrix3) {
+  // initialize the cipher
+  string key = "KEVIN";
+  string plaintext = "ABCDEFGHIJKLM";
+  RowTransposition rt_cipher(key);
+
+  // construct the plaintext matrix
+  vector<string> plaintext_matrix = rt_cipher.constructPlaintextMatrix(plaintext);
+
+  // check the matrix size
+  BOOST_CHECK_EQUAL(plaintext_matrix.size(), 3);
+  BOOST_CHECK_EQUAL(plaintext_matrix.at(0).length(), 5);
+  BOOST_CHECK_EQUAL(plaintext_matrix.at(1).length(), 5);
+  BOOST_CHECK_EQUAL(plaintext_matrix.at(2).length(), 3);
+
+  // print the matrix
+  //for (vector<string>::iterator itr = plaintext_matrix.begin();
+  //     itr != plaintext_matrix.end();
+  //     itr++) {
+  //  cout << *itr << endl;
+  //}
+}
+
+BOOST_AUTO_TEST_CASE(test_constructPlaintextMatrix4) {
+  // initialize the cipher
+  string key = "KEVIN";
+  string plaintext = "";
+  RowTransposition rt_cipher(key);
+
+  // construct the plaintext matrix
+  vector<string> plaintext_matrix = rt_cipher.constructPlaintextMatrix(plaintext);
+
+  // check the matrix size
+  BOOST_CHECK_EQUAL(plaintext_matrix.size(), 0);
+
+  // print the matrix
+  //for (vector<string>::iterator itr = plaintext_matrix.begin();
+  //     itr != plaintext_matrix.end();
+  //     itr++) {
+  //  cout << *itr << endl;
+  //}
+}
+
+BOOST_AUTO_TEST_CASE(test_encrypt1) {
+  // initialize the cipher
+  string key = "3421567";
+  string plaintext = "attackpostponeduntiltwoamxyz";
+  RowTransposition rt_cipher(key);
+
+  // encryption
+  string ciphertext = rt_cipher.encrypt(plaintext);
+
+  // check the encryption
+  BOOST_CHECK_EQUAL(ciphertext, "TTNAAPTMTSUOAODWCOIXKNLYPETZ");
+}
+
+BOOST_AUTO_TEST_CASE(test_encrypt2) {
+  // initialize the cipher
+  string key = "3421567";
+  string plaintext = "attackpostponeduntiltwoam";
+  RowTransposition rt_cipher(key);
+
+  // encryption
+  string ciphertext = rt_cipher.encrypt(plaintext);
+
+  // check the encryption
+  BOOST_CHECK(ciphertext.compare("TTNAAPTMTSUOAODWCOIXKNLYPETZ") != 0);
+}
+
+BOOST_AUTO_TEST_CASE(test_encrypt3) {
+  // initialize the cipher
+  string key = "value";
+  string plaintext = "ALICEBOBBYCHRISDELLAEDITHFRANKGRACE";
+  RowTransposition rt_cipher(key);
+
+  // encryption
+  string ciphertext = rt_cipher.encrypt(plaintext);
+
+  // check the encryption
+  BOOST_CHECK_EQUAL(ciphertext, "EYSAHKEABCDEFGIBRLIAACBILTNCLOHEDRR");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

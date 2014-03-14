@@ -1,11 +1,14 @@
 #ifndef ROWTRANSPOSITION_H
 #define ROWTRANSPOSITION_H
 
-#include <vector>   /* For vectors */
-#include <string>   /* For C++ strings */
-#include <iostream>
-#include <cstdio>  /* For standard I/O */
-#include <cstdlib> /* For miscellenous C functions */
+#include <vector>     /* For vectors */
+#include <string>     /* For C++ strings */
+#include <iostream>   //i/o stream
+#include <algorithm>  //std::transform
+#include <cctype>     //::toupper
+#include <cstdio>     /* For standard I/O */
+#include <cstdlib>    /* For miscellenous C functions */
+#include <ctime>
 #include "CipherInterface.h"
 
 
@@ -58,13 +61,26 @@ class RowTransposition: public CipherInterface
     static bool validateKey(const string& mykey);
 
     /**
+     * The member function pad the plaintext to be the multiple of the size of
+     * rank key
+     */
+    string padText(const string& text);
+
+    /**
+     * The member function transform the linear sequence of plaintext to the
+     * matrix form
+     */
+    vector<string> constructPlaintextMatrix(const string& plaintext);
+
+
+    /**
      * getters and setters
      */
-    inline vector<int> getKey() const {return rank_key;}
+    inline vector<size_t> getKey() const {return rank_key;}
 
 		/* The protected members */
 	protected:
-    vector<int> rank_key;
+    vector<size_t> rank_key;
 
 
 };
