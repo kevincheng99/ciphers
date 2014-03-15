@@ -1,7 +1,7 @@
 #include "RowTransposition.h"
 
-RowTransposition::RowTransposition() {
-  // do nothing
+RowTransposition::RowTransposition():number_of_fillers(0) {
+  // may do something
 }
 
 RowTransposition::RowTransposition(const std::string& mykey) {
@@ -44,6 +44,7 @@ bool RowTransposition::setKey(const std::string& mykey)
 string RowTransposition::encrypt(const std::string& plaintext) {
   using namespace std;
 
+  // we are assuming the plaintext contains only Engish letters
   // transform the input text to uppercase
   string processed_plaintext = "";
 
@@ -79,10 +80,24 @@ string RowTransposition::encrypt(const std::string& plaintext) {
  * @param cipherText - the ciphertext
  * @return - the plaintext
  */
-string RowTransposition::decrypt(const std::string& cipherText) 
-{ 
-	return ""; 
-	
+string RowTransposition::decrypt(const std::string& ciphertext) {
+  // construct ciphertext matrix
+  vector<string> ciphertext_matrix = constructCiphertextMatrix(ciphertext);
+  
+  // read by columns starting from the first column
+  string plaintext = "";
+  size_t columns = ciphertext.length() / rank_key.size();
+
+  for (size_t j = 0; j < columns; j++) {
+    for (size_t i = 0; i < ciphertext_matrix.size(); i++) {
+      plaintext.push_back(ciphertext_matrix.at(i).at(j));
+    }
+  }
+ 
+  // remove the padding
+  plaintext = dropFillers(plaintext);
+
+	return plaintext; 
 }
 
 /**
@@ -114,7 +129,9 @@ string RowTransposition::padText(const std::string& text) {
   size_t remainder_of_characters = text.length() % rank_key.size();
 
   if (remainder_of_characters > 0) {
-    size_t number_of_fillers = rank_key.size() - remainder_of_characters;
+    size_t fillers = rank_key.size() - remainder_of_characters;
+    setNumberOfFillers(fillers);
+
   
     //initialize the random seed
     srand(time(NULL));
@@ -131,8 +148,26 @@ string RowTransposition::padText(const std::string& text) {
   return processed_text;
 }
 
+string RowTransposition::dropFillers(const std::string& text) {
+  using namespace std;
+
+  string processed_text = text;
+  size_t n_fillers = getNumberOfFillers();
+  size_t length = processed_text.length() - n_fillers;
+  processed_text = processed_text.substr(0, length);
+
+  // c++11 only: drop the last n number of fillers
+  //for (size_t i = 0; i < n_fillers; i++) {
+    //processed_text.pop_back();
+  //}
+
+  return processed_text;
+}
+
+
+
 vector<string> RowTransposition::constructPlaintextMatrix(
-                                     const string& plaintext) {
+                                     const std::string& plaintext) {
   using namespace std;
 
   vector<string> plaintext_matrix;
@@ -144,7 +179,33 @@ vector<string> RowTransposition::constructPlaintextMatrix(
   return plaintext_matrix;
 }
 
+vector<string> RowTransposition::constructCiphertextMatrix(
+                                     const std::string& ciphertext) {
+  using namespace std;
 
+  // compute the number of characters for each row
+  size_t characters_per_row  = ciphertext.length() / rank_key.size();
+
+  // construct the ciphertext matrix, where each row is encoded/decoed by a key
+  vector<string> ciphertext_matrix;
+  ciphertext_matrix.resize(rank_key.size());
+
+  for (size_t i = 0; i < rank_key.size(); i++) {
+    string row_string = ciphertext.substr(
+                            i * characters_per_row,
+                            characters_per_row);
+    ciphertext_matrix.at(rank_key.at(i)) = row_string;
+  }
+
+  // print the matrix content
+  //for (vector<string>::iterator itr = ciphertext_matrix.begin();
+  //     itr != ciphertext_matrix.end();
+  //     itr++) {
+  //  cout << *itr << endl;
+  //}
+
+  return ciphertext_matrix;
+}
 
 
 

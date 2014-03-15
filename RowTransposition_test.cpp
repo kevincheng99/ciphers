@@ -325,9 +325,100 @@ BOOST_AUTO_TEST_CASE(test_encrypt3) {
   BOOST_CHECK_EQUAL(ciphertext, "EYSAHKEABCDEFGIBRLIAACBILTNCLOHEDRR");
 }
 
+BOOST_AUTO_TEST_CASE(test_constructCiphertextMatrix1) {
+  // initialize the cipher
+  string key = "3102";
+  string ciphertext= "DHLBFJAEICGK";
+  RowTransposition rt_cipher(key);
 
+  // construct the ciphertext matrix
+  vector<string> ciphertext_matrix = rt_cipher.constructCiphertextMatrix(ciphertext);
+  vector<string> expected_matrix;
 
+  expected_matrix.push_back("AEI");
+  expected_matrix.push_back("BFJ");
+  expected_matrix.push_back("CGK");
+  expected_matrix.push_back("DHL");
 
+  // check the matrix size
+  BOOST_CHECK_EQUAL(ciphertext_matrix.size(), 4);
+  BOOST_CHECK_EQUAL(ciphertext_matrix.at(3).length(), 3);
+
+  // check the matrix content
+  for (size_t i = 0; i < expected_matrix.size(); i++) {
+    BOOST_CHECK_EQUAL(expected_matrix.at(i), ciphertext_matrix.at(i));
+  }
+}
+
+BOOST_AUTO_TEST_CASE(test_constructCiphertextMatrix2) {
+  // initialize the cipher
+  string key = "3421567";
+  string ciphertext= "TTNAAPTMTSUOAODWCOIXKNLYPETZ";
+  RowTransposition rt_cipher(key);
+
+  // construct the ciphertext matrix
+  vector<string> ciphertext_matrix = rt_cipher.constructCiphertextMatrix(ciphertext);
+  vector<string> expected_matrix;
+
+  expected_matrix.push_back("AODW");
+  expected_matrix.push_back("TSUO");
+  expected_matrix.push_back("TTNA");
+  expected_matrix.push_back("APTM");
+  expected_matrix.push_back("COIX");
+  expected_matrix.push_back("KNLY");
+  expected_matrix.push_back("PETZ");
+
+  // check the matrix size
+  BOOST_CHECK_EQUAL(ciphertext_matrix.size(), 7);
+  BOOST_CHECK_EQUAL(ciphertext_matrix.at(3).length(), 4);
+
+  // check the matrix content
+  for (size_t i = 0; i < expected_matrix.size(); i++) {
+    BOOST_CHECK_EQUAL(expected_matrix.at(i), ciphertext_matrix.at(i));
+  }
+}
+
+BOOST_AUTO_TEST_CASE(test_decryption1) {
+  // initialize the cipher
+  string key = "3421567";
+  string plaintext = "attackpostponeduntiltwoam";
+  RowTransposition rt_cipher(key);
+
+  // encrypt and then, decrypt
+  string ciphertext = rt_cipher.encrypt(plaintext);
+  string decrypted_ciphertext = rt_cipher.decrypt(ciphertext);
+
+  //check the process of encryption and decryption
+  BOOST_CHECK_EQUAL(decrypted_ciphertext, "ATTACKPOSTPONEDUNTILTWOAM");
+}
+
+BOOST_AUTO_TEST_CASE(test_decryption2) {
+  // initialize the cipher
+  string key = "chris";
+  string plaintext = "RETURNSANEWLYCONSTRUCTEDSTRINGOBJECTWITHITSVALUEINITIALIZEDTOA COPYOFASUBSTRINGOFTHISOBJECT";
+  RowTransposition rt_cipher(key);
+
+  // encrypt and then, decrypt
+  string ciphertext = rt_cipher.encrypt(plaintext);
+  string decrypted_ciphertext = rt_cipher.decrypt(ciphertext);
+
+  //check the process of encryption and decryption
+  BOOST_CHECK_EQUAL(decrypted_ciphertext, plaintext);
+}
+
+BOOST_AUTO_TEST_CASE(test_decryption3) {
+  // initialize the cipher
+  string key = "chris";
+  string plaintext = "ROWTRANSPOSITIONCIPHER";
+  RowTransposition rt_cipher(key);
+
+  // encrypt and then, decrypt
+  string ciphertext = rt_cipher.encrypt(plaintext);
+  string decrypted_ciphertext = rt_cipher.decrypt(ciphertext);
+
+  //check the process of encryption and decryption
+  BOOST_CHECK_EQUAL(decrypted_ciphertext, plaintext);
+}
 
 
 

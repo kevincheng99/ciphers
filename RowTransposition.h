@@ -67,6 +67,17 @@ class RowTransposition: public CipherInterface
     string padText(const string& text);
 
     /**
+     * The member function removes the padding
+     */
+    string dropFillers(const string& text);
+
+    /**
+     *The member function construct a ciphertext matrix
+     */
+    vector<string> constructCiphertextMatrix(const string& ciphertext);
+
+
+    /**
      * The member function transform the linear sequence of plaintext to the
      * matrix form
      */
@@ -77,10 +88,16 @@ class RowTransposition: public CipherInterface
      * getters and setters
      */
     inline vector<size_t> getKey() const {return rank_key;}
+    inline size_t setNumberOfFillers(size_t myNumber) {
+      number_of_fillers = myNumber;
+      return number_of_fillers;
+    }
+    inline size_t getNumberOfFillers() {return number_of_fillers;}
 
 		/* The protected members */
 	protected:
     vector<size_t> rank_key;
+    size_t number_of_fillers;
 
 
 };
