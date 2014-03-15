@@ -21,40 +21,40 @@ using namespace std;
 
 class Playfair: public CipherInterface
 {
-	/** The public members **/
-	public:
+  /** The public members **/
+  public:
     Playfair();
 
     Playfair(const string& my_key);
 
     //Playfair(const string& my_key, const string& my_plaintext);
 
-		/**
-		 * Sets the key to use
-		 * @param key - the key to use
-		 * @return - True if the key is valid and False otherwise
-		 */
-		virtual bool setKey(const string& key);
+    /**
+     * Sets the key to use
+     * @param key - the key to use
+     * @return - True if the key is valid and False otherwise
+     */
+    virtual bool setKey(const string& key);
 
-		/**	
-		 * Encrypts a plaintext string
-		 * @param plaintext - the plaintext string
-		 * @return - the encrypted ciphertext string
-		 */
-		virtual string encrypt(const string& plaintext);
+    /** 
+     * Encrypts a plaintext string
+     * @param plaintext - the plaintext string
+     * @return - the encrypted ciphertext string
+     */
+    virtual string encrypt(const string& plaintext);
 
-		/**
-		 * Decrypts a string of ciphertext
-		 * @param ciphertext - the ciphertext
-		 * @return - the plaintext
-		 */
-		virtual string decrypt(const string& ciphertext);
-			
-		/**
-		 * Prints the Playfair matrix
-		 * @param fp - the file pointer
-		 */
-		void printMatrix(FILE* fp) const;
+    /**
+     * Decrypts a string of ciphertext
+     * @param ciphertext - the ciphertext
+     * @return - the plaintext
+     */
+    virtual string decrypt(const string& ciphertext);
+      
+    /**
+     * Prints the Playfair matrix
+     * @param fp - the file pointer
+     */
+    void printMatrix(FILE* fp) const;
 
     /**
      * The member function validates the key string in ASCII.
@@ -73,7 +73,7 @@ class Playfair: public CipherInterface
      * j.
      */
     static bool checkIJ(char test_character);
-		
+    
     /**
      * The member funciton pads the text with the specified filler.
      */
@@ -147,7 +147,7 @@ class Playfair: public CipherInterface
     //string plaintext;
     //string ciphertext;
 
-	
+  
 
 };
 
