@@ -1,6 +1,4 @@
 #include "Caesar.h"
-#include <stdlib.h>		
-
 
 /**
  * Sets the key to use

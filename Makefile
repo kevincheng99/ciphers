@@ -18,8 +18,8 @@ LDFLAG = -lboost_unit_test_framework
 
 all: cipher test_playfair test_rowtransposition
 
-cipher: cipher.o Playfair.o Caesar.o Vigenere.o RowTransposition.o
-	$(CC) $(CFLAG) cipher.o Playfair.o Caesar.o Vigenere.o -o cipher
+cipher: cipher.o Playfair.o Caesar.o Vigenere.o RowTransposition.o Railfence.o
+	$(CC) $(CFLAG) cipher.o Playfair.o Caesar.o Vigenere.o RowTransposition.o Railfence.o -o cipher
 
 cipher.o: cipher.cpp
 	$(CC) $(CFLAG)  -c cipher.cpp 
@@ -35,6 +35,9 @@ Vigenere.o: Vigenere.cpp Vigenere.h CipherInterface.h
 
 RowTransposition.o: RowTransposition.cpp RowTransposition.h CipherInterface.h
 	$(CC) $(CFLAG) -c RowTransposition.cpp
+	
+Railfence.o: Railfence.cpp Railfence.h CipherInterface.h
+	$(CC) $(CFLAG) -c Railfence.cpp
 
 test_playfair: Playfair_test.cpp Playfair.o
 	$(CC) $(CFLAG) -o test_playfair Playfair_test.cpp Playfair.o $(LDFLAG)

@@ -1,5 +1,4 @@
 #include "Vigenere.h"
-#include <stdlib.h>	
 
 /**
  * Sets the key to use
