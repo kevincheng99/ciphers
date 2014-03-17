@@ -1,7 +1,5 @@
 #include "Railfence.h"
 
-#include <iostream>
-
 /**
  * Sets the key to use
  * @param key - the key to use
@@ -70,7 +68,7 @@ string Railfence::decrypt(const string& cipherText)
 		stringcount += textlength;
 	}
 	
-	
+	// Go through every vector element, check if string is not empty, push back the first character and erase it.
 	for (unsigned int i = 0; i <= textlength; i++)
 	{
 		for (unsigned int j = 0; j < key; j++)
