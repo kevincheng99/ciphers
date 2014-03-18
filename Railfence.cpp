@@ -69,7 +69,7 @@ string Railfence::decrypt(const string& cipherText)
 	}
 	
 	// Go through every vector element, check if string is not empty, push back the first character and erase it.
-	for (unsigned int i = 0; i <= textlength; i++)
+	for (unsigned int i = 0; i < textlength + remainder; i++)
 	{
 		for (unsigned int j = 0; j < key; j++)
 		{
