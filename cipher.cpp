@@ -7,6 +7,7 @@
 #include "Playfair.h"
 #include "Caesar.h"
 #include "Vigenere.h"
+#include "Railfence.h"
 
 using namespace std;
 
