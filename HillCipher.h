@@ -4,6 +4,7 @@
 #include <string>   /* For C++ strings */
 #include <stdio.h>  /* For standard I/O */
 #include <stdlib.h> /* For miscellenous C functions */
+#include <vector>
 #include "CipherInterface.h"
 
 using namespace std;

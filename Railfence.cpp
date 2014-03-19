@@ -55,17 +55,22 @@ string Railfence::decrypt(const string& cipherText)
 	vector<string> ptext(key, ""); // To contain the letters in the string for Railfence
 	
 	int textlength = cipherText.size() / key; // Store length of the string that is split by the size of the key
-	int remainder = cipherText.size() % key; // Used to fill the remaining characters onto the first row
+	int remainder = cipherText.size() % key; // Store the remainder
 	int stringcount = 0;
 	
-	ptext.at(0).append(cipherText.substr(0,textlength + remainder)); // Append the first row with the remainder
-	stringcount = textlength + remainder;
-	
-	
-	for (unsigned int i = 1; i < key; i++)
+	for (unsigned int i = 0; i < key; i++)
 	{
-		ptext.at(i).append(cipherText.substr(stringcount,textlength)); // Append each vector row with the string split by key (textlength)
-		stringcount += textlength;
+		if (remainder > i)
+		{
+			ptext.at(i).append(cipherText.substr(stringcount,textlength + 1)); // Append this row split by the size of the key plus 1 due to remainder
+			stringcount += textlength + 1;
+		}
+		else
+		{
+			ptext.at(i).append(cipherText.substr(stringcount,textlength)); // Append this row split by the size of the key
+			stringcount += textlength;
+		}
+		
 	}
 	
 	// Go through every vector element, check if string is not empty, push back the first character and erase it.
