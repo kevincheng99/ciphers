@@ -101,9 +101,9 @@ cat plaintext.txt
 rm ciphertext.txt plaintext.txt
 
 echo -e "\n"
-echo "Test case 9: caesaw cipher"
+echo "Test case 9: caesar cipher"
 echo "./cipher CES 3 ENC short_input_file.txt ciphertext.txt"
-./cipher VIG kevin ENC short_input_file.txt ciphertext.txt
+./cipher CES 3 ENC short_input_file.txt ciphertext.txt
 
 echo "short input file:"
 cat short_input_file.txt
@@ -140,4 +140,62 @@ echo "./cipher kevin chris ENC invalid_input_file.txt delete_me.txt"
 ./cipher PLF chris ENC invalid_input_file.txt delete_me.txt
 
 rm delete_me.txt
+
+echo -e "\n"
+echo "Test case 14: railfence cipher"
+echo "./cipher RFC 100 short_input_file.txt ciphertext.txt"
+./cipher RFC 100 ENC short_input_file.txt ciphertext.txt
+
+echo "short input file:"
+cat short_input_file.txt
+
+echo "ciphertext:"
+cat ciphertext.txt
+
+echo -e "\n"
+echo "Test case 15: railfence cipher"
+echo "./cipher RFC 100 DEC ciphertext.txt plaintext.txt"
+./cipher RFC 100 DEC ciphertext.txt plaintext.txt
+
+echo "ciphertext:"
+cat ciphertext.txt
+
+echo "decrypted ciphertext"
+cat plaintext.txt
+
+rm ciphertext.txt plaintext.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
