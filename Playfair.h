@@ -7,6 +7,7 @@
 #include <vector>   /* For vectors */
 #include <string>   /* For C++ strings */
 #include <iostream> // std input/output
+#include <fstream>  // input and output file
 #include <algorithm>  // std::transform
 #include <cctype> //::toupper and not std::toupper
 #include <utility>  //std::pair

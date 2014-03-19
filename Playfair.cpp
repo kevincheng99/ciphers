@@ -147,6 +147,11 @@ std::string Playfair::encrypt(const std::string& myplaintext) {
     }
   }
 
+  // BUG: between each execution of program, the padding location will be lost
+  // Soln: write it ot file but keep it hidden
+
+
+
   return ciphertext;
 }
 

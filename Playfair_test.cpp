@@ -1031,6 +1031,20 @@ BOOST_AUTO_TEST_CASE(test_decrypt23) {
   BOOST_CHECK_EQUAL(playfair_cipher.decrypt(ciphertext), "SECUIZRITY");
 }
 
+BOOST_AUTO_TEST_CASE(test_decrypt24) {
+  // initialize the cipher
+  string key = "chris";
+  string plaintext = "HelloWorldThisIsDummy";
+  Playfair playfair_cipher(key);
+  
+  // encrypt the plaintext
+  string ciphertext = playfair_cipher.encrypt(plaintext);
+
+  // check the content
+  BOOST_CHECK_EQUAL(playfair_cipher.decrypt(ciphertext), "HELLOWORLDTHISISDUMMY");
+}
+
+
 BOOST_AUTO_TEST_CASE(test_printMatrix) {
   FILE* outfile;
   
