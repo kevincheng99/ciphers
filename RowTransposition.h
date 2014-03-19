@@ -1,16 +1,16 @@
 #ifndef ROWTRANSPOSITION_H
 #define ROWTRANSPOSITION_H
 
-#include <vector>     /* For vectors */
-#include <string>     /* For C++ strings */
-#include <iostream>   //i/o stream
-#include <algorithm>  //std::transform
 #include <cctype>     //::toupper
 #include <cstdio>     /* For standard I/O */
 #include <cstdlib>    /* For miscellenous C functions */
 #include <ctime>
 #include "CipherInterface.h"
-
+#include <vector>     /* For vectors */
+#include <string>     /* For C++ strings */
+#include <iostream>   // io stream
+#include <fstream>    // file stream
+#include <algorithm>  // std::transform
 
 /**
  * This class implements the playfair cipher.

@@ -72,6 +72,24 @@ string RowTransposition::encrypt(const std::string& plaintext) {
     }
   }
 
+  // BUG: the number of fillers was lost btw two separated execution of program
+  // for encryption and decryption respectively.
+  // Solution: store the number of fillers in the file
+
+  if (number_of_fillers != 0) {
+    // initialize the output stream object
+    ofstream output_file(".rowtransposition_fillers", ofstream::out);
+
+    // if output file stream is valid, write the number of fillers
+    if (!output_file) {
+      perror("open output file");
+    }
+    else {
+      output_file << ciphertext << " " << number_of_fillers << endl;
+      output_file.close();
+    }
+  }
+
 	return ciphertext; 
 }
 
@@ -95,7 +113,33 @@ string RowTransposition::decrypt(const std::string& ciphertext) {
   }
  
   // remove the padding
-  plaintext = dropFillers(plaintext);
+  if (number_of_fillers != 0) {
+    plaintext = dropFillers(plaintext);
+  }
+  else {
+    // initalize the input file stream object
+    ifstream input_file(".rowtransposition_fillers", ifstream::in);
+
+    // if the input file stream is valid
+    //  read the ciphertext and number of fillers 
+    //  drop the fillers
+    if (!input_file) {
+      perror("open input file");
+    }
+    else {
+      string ciphertext_infile = "";
+
+      // read the cipher text in file
+      input_file >> ciphertext_infile;
+
+      if (ciphertext_infile.compare(ciphertext) == 0) {
+        input_file >> number_of_fillers;
+        input_file.close();
+
+        plaintext = dropFillers(plaintext);
+      }
+    }
+  }
 
 	return plaintext; 
 }
