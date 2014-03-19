@@ -716,7 +716,8 @@ BOOST_AUTO_TEST_CASE(test_decrypt2) {
   Playfair playfair_cipher(key);
   
   // check the content
-  BOOST_CHECK_EQUAL(playfair_cipher.decrypt("AEXAXA"), "MISXSX");
+  //BOOST_CHECK_EQUAL(playfair_cipher.decrypt("AEXAXA"), "MISXSX");
+  BOOST_CHECK_EQUAL(playfair_cipher.decrypt("AEXAXA"), "MISS");
 }
 
 BOOST_AUTO_TEST_CASE(test_decrypt3) {

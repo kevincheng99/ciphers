@@ -1,8 +1,8 @@
 #ifndef PLAYFAIR_H
 #define PLAYFAIR_H
 
-#include <stdio.h>  /* For standard I/O */
-#include <stdlib.h> /* For miscellenous C functions */
+#include <cstdio>  /* For standard I/O */
+#include <cstdlib> /* For miscellenous C functions */
 #include "CipherInterface.h"
 #include <vector>   /* For vectors */
 #include <string>   /* For C++ strings */
@@ -127,7 +127,7 @@ class Playfair: public CipherInterface
     //}
 
     vector<unsigned int> setPaddingLocation(const string& text);
-    
+
     inline vector<unsigned int> getPaddingLocation() const {
       return padding_location;
     }
@@ -141,6 +141,7 @@ class Playfair: public CipherInterface
   protected:
     const int kVectorLength;
     const int kStringLength;
+    const char filler;
     vector<unsigned int> padding_location;
     vector<string> key_matrix;
     //string user_key;

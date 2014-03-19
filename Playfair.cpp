@@ -8,7 +8,8 @@
 #include "Playfair.h"
 
 Playfair::Playfair():kVectorLength(5),
-                     kStringLength(5) {
+                     kStringLength(5),
+                     filler('X') {
                      //user_key("") {
                      //plaintext("") {
   // do nothing
@@ -16,7 +17,8 @@ Playfair::Playfair():kVectorLength(5),
 
 Playfair::Playfair(const std::string& my_key ):
               kVectorLength(5),
-              kStringLength(5) {
+              kStringLength(5),
+              filler('X') {
               //user_key(my_key) {
               //plaintext("") {
   // set the key matrix
@@ -93,8 +95,6 @@ std::string Playfair::encrypt(const std::string& myplaintext) {
  
 
   // pad plaintext 
-  char filler = 'X';
-
   processed_plaintext = padText(processed_plaintext, filler);
 
   // for each pair of letters
@@ -148,9 +148,35 @@ std::string Playfair::encrypt(const std::string& myplaintext) {
   }
 
   // BUG: between each execution of program, the padding location will be lost
-  // Soln: write it ot file but keep it hidden
+  // Soln: write it ot file, keep it hidden and document it
+  // Alternative soln: use X or Z as fillers and drop all X and Z
 
+  if (padding_location.empty() == false) {
+    // initialize the output stream object to the hidden file
+    ofstream output_file(".playfair_padding_location", ofstream::out);
 
+    // if the output file can't be open, output the error message
+    // else start to save the padding locations
+    if(!output_file) {
+      perror("open output file");
+    }
+    else {
+      // write the ciphertext and use is as identifier for padding locations
+      output_file << ciphertext << " ";
+
+      // write the padding location to the file with a space delimiter
+      for (vector<unsigned int>::iterator itr = padding_location.begin();
+          itr != padding_location.end();
+           ++itr) {
+        output_file << *itr << " ";
+      }
+  
+      output_file << endl;
+
+      // close output file stream
+      output_file.close();
+    }
+  }
 
   return ciphertext;
 }
@@ -203,6 +229,46 @@ std::string Playfair::decrypt(const std::string& ciphertext) {
   // drop the fillers
   if (padding_location.empty() == false) {
     decrypted_ciphertext = dropFillers(decrypted_ciphertext);
+  }
+  else {
+    // get the padding location from the input file
+    // initialze the input file stream to the hidden file
+    ifstream input_file(".playfair_padding_location", ifstream::in);
+
+    // check if the hidden file exists
+    if (!input_file) {
+      perror("open input file");
+    }
+    else {
+      string ciphertext_infile = "";
+
+      // read the ciphertext in the file
+      input_file >> ciphertext_infile;
+
+      // if the ciphertext in the input file is equal to the user specified
+      // ciphertext, remove the paddings
+      if (ciphertext_infile.compare(ciphertext) == 0) {
+        unsigned int location = 0;
+        
+        // get the first padding location
+        input_file >> location;
+
+        while (input_file.good()) {
+          // store the padding location
+          padding_location.push_back(location);
+
+          // get the next padding location
+          input_file >> location;
+        }
+  
+        // close input file stream
+        input_file.close();
+  
+        // drop the fillers
+        decrypted_ciphertext = dropFillers(decrypted_ciphertext);
+      }
+    }
+    
   }
 
   // BUG
