@@ -5,6 +5,8 @@
 #include <cstring>
 #include "CipherInterface.h"
 #include "Playfair.h"
+#include "RowTransposition.h"
+#include "Railfence.h"
 #include "Caesar.h"
 #include "Vigenere.h"
 #include "Railfence.h"
@@ -52,6 +54,26 @@ int main(int argc, char** argv)
     perror("open output file");
     return -3;
   }
+
+  // read the plaintext from a file into a string
+  string plaintext = "";
+  
+  // get the first line
+  input_file >> plaintext;
+
+  // while the input file stream is good, get the next line
+  while (input_file.good()) {
+    string next_line = "";
+
+    // get the next line
+    input_file >> next_line;
+
+    // append to the plaintext
+    plaintext.append(next_line);
+  }
+
+
+  /*
 
   if (strcmp("PLF", argv[kCipherName]) == 0) {
     cout << "Playfair Cipher" << endl; 
@@ -272,6 +294,8 @@ int main(int argc, char** argv)
 
       return -4;
   }
+
+  */
 
   // close input file stream object
   input_file.close();
