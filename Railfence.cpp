@@ -70,11 +70,10 @@ string Railfence::decrypt(const string& cipherText)
 			ptext.at(i).append(cipherText.substr(stringcount,textlength)); // Append this row split by the size of the key
 			stringcount += textlength;
 		}
-		
 	}
 	
 	// Go through every vector element, check if string is not empty, push back the first character and erase it.
-	for (unsigned int i = 0; i < textlength + remainder; i++)
+	for (unsigned int i = 0; i < textlength + 1; i++)
 	{
 		for (unsigned int j = 0; j < key; j++)
 		{
