@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# make the executables FRESH
+# rebuild the executables FRESH
 make clean
 make
 
@@ -164,7 +164,7 @@ echo "decrypted ciphertext"
 cat plaintext.txt
 
 rm ciphertext.txt plaintext.txt
-
+rm .playfair_padding_location .rowtransposition_fillers
 
 
 

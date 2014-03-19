@@ -136,8 +136,6 @@ int main(int argc, char** argv)
   // Set the encryption/decription key
   string mykey(argv[kKey]);
   
-  cout << mykey << endl;
-
   if (!(cipher->setKey(mykey))) {
     cerr << "invalid key: " << mykey << endl;
       
