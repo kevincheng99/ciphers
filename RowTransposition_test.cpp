@@ -325,6 +325,20 @@ BOOST_AUTO_TEST_CASE(test_encrypt3) {
   BOOST_CHECK_EQUAL(ciphertext, "EYSAHKEABCDEFGIBRLIAACBILTNCLOHEDRR");
 }
 
+BOOST_AUTO_TEST_CASE(test_encrypt4) {
+  // initialize the cipher
+  string key = "each";
+  string plaintext = "COMPUTERSECURITY";
+  RowTransposition rt_cipher(key);
+
+  // encryption
+  string ciphertext = rt_cipher.encrypt(plaintext);
+
+  // check the encryption
+  BOOST_CHECK_EQUAL(ciphertext, "MECTCUSROTEIPRUY");
+}
+
+
 BOOST_AUTO_TEST_CASE(test_constructCiphertextMatrix1) {
   // initialize the cipher
   string key = "3102";
@@ -395,7 +409,7 @@ BOOST_AUTO_TEST_CASE(test_decryption1) {
 BOOST_AUTO_TEST_CASE(test_decryption2) {
   // initialize the cipher
   string key = "chris";
-  string plaintext = "RETURNSANEWLYCONSTRUCTEDSTRINGOBJECTWITHITSVALUEINITIALIZEDTOA COPYOFASUBSTRINGOFTHISOBJECT";
+  string plaintext = "RETURNS A NEWLY CONSTRUCTED STRING OBJECT WITH ITS VALUEINITIALIZEDTOA COPYOFASUBSTRINGOFTHISOBJECT";
   RowTransposition rt_cipher(key);
 
   // encrypt and then, decrypt
