@@ -83,7 +83,7 @@ int main(int argc, char** argv)
     return -10;
   }
 
-  // declare a cipher pointer to the interface
+  // declare a pointer to the cipher interface
   CipherInterface* cipher;
 
   // choose a cipher
