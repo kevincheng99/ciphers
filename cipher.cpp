@@ -15,11 +15,13 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-  /* REPLACE THIS PART WITH YOUR CODE
+ /**
+  * Professor Gofman's comment block
+  * REPLACE THIS PART WITH YOUR CODE
   * THE CODE BELOW IS A SAMPLE TO
   * ILLUSTRATE INSTANTIATION OF CLASSES
   * THAT USE THE SAME INTERFACE.
-  */	
+  */  
 
   enum CommandLineFieldName {
     kCipherName = 1,
@@ -55,11 +57,11 @@ int main(int argc, char** argv)
     return -3;
   }
 
-  // read the plaintext from a file into a string
-  string plaintext = "";
+  // read the text (plaintext or ciphertext) from a file into a string
+  string text = "";
   
-  // get the first line
-  input_file >> plaintext;
+  // read the first line
+  input_file >> text;
 
   // while the input file stream is good, get the next line
   while (input_file.good()) {
@@ -68,238 +70,106 @@ int main(int argc, char** argv)
     // get the next line
     input_file >> next_line;
 
-    // append to the plaintext
-    plaintext.append(next_line);
+    // append to the text
+    text.append(next_line);
   }
 
+  // close input file stream
+  input_file.close();
 
-  /*
+  // check if the text is empty
+  if (text.empty()) {
+    cerr << "ERROR: input file should not be empty" << endl;
+    return -10;
+  }
 
+  // declare a cipher pointer to the interface
+  CipherInterface* cipher;
+
+  // choose a cipher
   if (strcmp("PLF", argv[kCipherName]) == 0) {
-    cout << "Playfair Cipher" << endl; 
+    //cout << "Playfair Cipher" << endl; 
     
-    // Create an instance of the Playfair cipher	
-    CipherInterface* cipher = new Playfair();
-  
-    // Error checks
-    if(!cipher)
-    {
-      fprintf(stderr, "ERROR [%s %s %d]: could not allocate memory\n",	
-      __FILE__, __FUNCTION__, __LINE__);
-      exit(-1);
-    }
-
-    // Set the encryption key
-    string mykey(argv[kKey]);
-
-    if (!(cipher->setKey(mykey))) {
-      cerr << "invalid key: " << mykey << endl;
-      
-      // close input file stream object
-      input_file.close();
-
-      // close output file stream object
-      output_file.close();
-
-      return -5;
-    }
-
-    // encryption or decryption
-    if (strcmp("ENC", argv[kEncryptionOrDecryption]) == 0) {
-      // read from input file
-      // encrypt
-      // write to output file
-
-      // test to read input file
-      string input_line = "";
-      input_file >> input_line;
-
-      // check if file is empty
-      
-      while (!input_file.eof()) {
-        cout << input_line << endl;
-        input_file >> input_line;
-      }
-      
-      string cipherText = cipher->encrypt("hereisanicestringcanyouseeit");
-      
-      cout << "ciphertext: " << cipherText << endl;
-    }
-    else if (strcmp("DEC", argv[kEncryptionOrDecryption]) == 0) {
-      // read from input file
-      // decrypt
-      // write to output file
-
-      string cipherText = cipher->encrypt("hereisanicestringcanyouseeit");
-      string decrypted_ciphertext = cipher->decrypt(cipherText);
-
-      cout << "decrypted ciphertext: " << decrypted_ciphertext << endl;
-      
-      // write to the output file
-      output_file << "decrypted ciphertext: " << decrypted_ciphertext << endl;
-    }
-    else {
-      cerr << "invalid ENC/DEC option: " << argv[kEncryptionOrDecryption];
-      cerr << endl;
-            
-      // close input file stream object
-      input_file.close();
-
-      // close output file stream object
-      output_file.close();
-
-      return -6;
-    }
+    // Create an instance of the Playfair cipher  
+    cipher = new Playfair();
   }
   else if (strcmp("RTS", argv[kCipherName]) == 0) {
-    cout << "Row Transposition Cipher" << endl; 
-  }
+    //cout << "Row Transposition Cipher" << endl; 
+    
+    // Create an instance of the Row Transposition cipher 
+    cipher = new RowTransposition();
+   }
   else if (strcmp("RFC", argv[kCipherName]) == 0) {
-    cout << "Railfence Cipher" << endl; 
+    //cout << "Railfence Cipher" << endl; 
+
+    // Create an instance of the Railfence cipher 
+    cipher = new Railfence();
   }
   else if (strcmp("VIG", argv[kCipherName]) == 0) {
-    cout << "Vigenere Cipher" << endl; 
+    //cout << "Vigenere Cipher" << endl; 
     
-    //Create an instance of the Cesar cipher	
-    CipherInterface* cipher = new Vigenere();
-  
-    //Error checks
-    if(!cipher)
-    {
-      fprintf(stderr, "ERROR [%s %s %d]: could not allocate memory\n",	
-      __FILE__, __FUNCTION__, __LINE__);
-      exit(-1);
-    }
-
-    // Set the encryption key
-    //cipher->setKey("Gofman");
-    string mykey(argv[kKey]);
-
-    if (!(cipher->setKey(mykey))) {
-      cerr << "invalid key: " << mykey << endl;
-                  
-      // close input file stream object
-      input_file.close();
-
-      // close output file stream object
-      output_file.close();
-
-      return -5;
-    }
-
-    // encryption or decryption
-    if (strcmp("ENC", argv[kEncryptionOrDecryption]) == 0) {
-      // read from input file
-      // encrypt
-      // write to output file
-
-      string cipherText = cipher->encrypt("KevinEnjoysEncryption");
-      
-      cout << "ciphertext: " << cipherText << endl;
-    }
-    else if (strcmp("DEC", argv[kEncryptionOrDecryption]) == 0) {
-      // read from input file
-      // decrypt
-      // write to output file
-
-      string cipherText = cipher->encrypt("KevinEnjoysEncryption");
-      string decrypted_ciphertext = cipher->decrypt(cipherText);
-
-      cout << "decrypted ciphertext: " << decrypted_ciphertext << endl;
-    }
-    else {
-      cerr << "invalid ENC/DEC option: " << argv[kEncryptionOrDecryption];
-      cerr << endl;
-                  
-      // close input file stream object
-      input_file.close();
-
-      // close output file stream object
-      output_file.close();
-
-      return -6;
-    }
+    // Create an instance of the Vignenere cipher 
+    cipher = new Vigenere();
   }
   else if (strcmp("CES", argv[kCipherName]) == 0) {
-    cout << "Caesar Cipher" << endl; 
+    //cout << "Caesar Cipher" << endl; 
     
-    //Create an instance of the Cesar cipher	
-    CipherInterface* cipher = new Caesar();
-  
-    //Error checks
-    if(!cipher)
-    {
-      fprintf(stderr, "ERROR [%s %s %d]: could not allocate memory\n",	
-      __FILE__, __FUNCTION__, __LINE__);
-      exit(-1);
-    }
-
-    // Set the encryption key
-    //string mykey("3");
-    string mykey(argv[kKey]);
-
-    if (!(cipher->setKey(mykey))) {
-      cerr << "invalid key: " << mykey << endl;
-            
-      // close input file stream object
-      input_file.close();
-
-      // close output file stream object
-      output_file.close();
-
-       return -5;
-    }
-
-    // encryption or decryption
-    if (strcmp("ENC", argv[kEncryptionOrDecryption]) == 0) {
-      // read from input file
-      // encrypt
-      // write to output file
-
-      string cipherText = cipher->encrypt("KevinIsAwesomeXYZ");
-      
-      cout << "ciphertext: " << cipherText << endl;
-    }
-    else if (strcmp("DEC", argv[kEncryptionOrDecryption]) == 0) {
-      // read from input file
-      // decrypt
-      // write to output file
-
-      string cipherText = cipher->encrypt("KevinIsAwesomeXYZ");
-      string decrypted_ciphertext = cipher->decrypt(cipherText);
-
-      cout << "decrypted ciphertext: " << decrypted_ciphertext << endl;
-    }
-    else {
-      cerr << "invalid ENC/DEC option: " << argv[kEncryptionOrDecryption];
-      cerr << endl;
-                  
-      // close input file stream object
-      input_file.close();
-
-      // close output file stream object
-      output_file.close();
-
-      return -6;
-    }
+    //Create an instance of the Cesar cipher  
+    cipher = new Caesar();
   }
   else {
     cerr << "invalid cipher name: " << argv[kCipherName] << endl;
                 
-      // close input file stream object
-      input_file.close();
+    // close output file stream object
+    output_file.close();
 
-      // close output file stream object
-      output_file.close();
-
-      return -4;
+    return -4;
   }
 
-  */
+  // Error checks
+  if (!cipher) {
+    fprintf(stderr, "ERROR [%s %s %d]: could not allocate memory\n",  
+    __FILE__, __FUNCTION__, __LINE__);
+    exit(-1);
+  }
 
-  // close input file stream object
-  input_file.close();
+  // Set the encryption/decription key
+  string mykey(argv[kKey]);
 
+  if (!(cipher->setKey(mykey))) {
+    cerr << "invalid key: " << mykey << endl;
+      
+    // close output file stream object
+    output_file.close();
+
+    return -5;
+  }
+
+  // encryption or decryption
+  if (strcmp("ENC", argv[kEncryptionOrDecryption]) == 0) {
+    // encrypt
+    string ciphertext = cipher->encrypt(text);
+    
+    // write to output file
+    output_file << ciphertext << endl;
+  }
+  else if (strcmp("DEC", argv[kEncryptionOrDecryption]) == 0) {
+    // decrypt
+    string decrypted_ciphertext = cipher->decrypt(text);
+      
+    // write to the output file
+    output_file << decrypted_ciphertext << endl;
+  }
+  else {
+    cerr << "invalid ENC/DEC option: " << argv[kEncryptionOrDecryption];
+    cerr << endl;
+            
+    // close output file stream object
+    output_file.close();
+
+    return -6;
+  }
+ 
   // close output file stream object
   output_file.close();
 
