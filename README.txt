@@ -29,3 +29,11 @@ https://github.com/kevincheng99/classical-ciphers
 After exeuction of Playfaire and Row Transposition cipher, please remove the
 following two files, ".playfair_padding_location" and
 ".rowtransposition_fillers".
+
+Here is a list of requirements for our key choices of each cipher.
+For Caesar cipher, a candidate key is a non-negative integer.
+For Vigenere cipher, a candidate key is a string of English alphabet.
+For Railfence cipher, a candidate key is a positive integer.
+For Row Transposition cipher, a candidate key is a string of English alphabet
+with its length less than the number of characters in the text.
+For Playfair cipher, a candidate key is a string of English alphabet.
