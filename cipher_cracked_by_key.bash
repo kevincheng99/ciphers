@@ -2,8 +2,8 @@
 # the keys are mostly composed of alpha-numeric.
 
 # rebuild the executables FRESH
-#make clean
-#make
+make clean
+make
 
 # test on Caesar cipher
 echo -e "\n"
@@ -28,6 +28,9 @@ cat ciphertext.txt
 echo "decripted ciphertext:"
 cat plaintext.txt
 
+# clean up files
+rm ciphertext.txt plaintext.txt
+
 echo -e "\n"
 echo "Test case 27: caesar cipher"
 echo "./cipher CES 100 ENC short_input_file.txt ciphertext.txt"
@@ -49,6 +52,9 @@ cat ciphertext.txt
 
 echo "decripted ciphertext:"
 cat plaintext.txt
+
+# clean up files
+rm ciphertext.txt plaintext.txt
 
 echo -e "\n"
 echo "Test case 29: caesar cipher"
@@ -72,6 +78,9 @@ cat ciphertext.txt
 echo "decripted ciphertext:"
 cat plaintext.txt
 
+# clean up files
+rm ciphertext.txt plaintext.txt
+
 echo -e "\n"
 echo "Test case 31: caesar cipher"
 echo "./cipher CES -1 ENC short_input_file.txt ciphertext.txt"
@@ -93,6 +102,9 @@ cat ciphertext.txt
 
 echo "decripted ciphertext:"
 cat plaintext.txt
+
+# clean up files
+rm ciphertext.txt plaintext.txt
 
 echo -e "\n"
 echo "Test case 33: vigenere cipher"
@@ -116,6 +128,9 @@ cat ciphertext.txt
 echo "decripted ciphertext:"
 cat plaintext.txt
 
+# clean up files
+rm ciphertext.txt plaintext.txt
+
 echo -e "\n"
 echo "Test case 35: vigenere cipher"
 echo "./cipher VIG 1 ENC short_input_file.txt ciphertext.txt"
@@ -137,6 +152,9 @@ cat ciphertext.txt
 
 echo "decripted ciphertext:"
 cat plaintext.txt
+
+# clean up files
+rm ciphertext.txt plaintext.txt
 
 echo -e "\n"
 echo "Test case 37: vigenere cipher"
@@ -160,6 +178,9 @@ cat ciphertext.txt
 echo "decripted ciphertext:"
 cat plaintext.txt
 
+# clean up files
+rm ciphertext.txt plaintext.txt
+
 echo -e "\n"
 echo "Test case 39: vigenere cipher"
 echo "./cipher VIG a ENC short_input_file.txt ciphertext.txt"
@@ -181,6 +202,9 @@ cat ciphertext.txt
 
 echo "decripted ciphertext:"
 cat plaintext.txt
+
+# clean up files
+rm ciphertext.txt plaintext.txt
 
 echo -e "\n"
 echo "Test case 41: railfence cipher"
@@ -204,6 +228,9 @@ cat ciphertext.txt
 echo "decripted ciphertext:"
 cat plaintext.txt
 
+# clean up files
+rm ciphertext.txt plaintext.txt
+
 echo -e "\n"
 echo "Test case 43: railfence cipher"
 echo "./cipher RFC 0 ENC short_input_file.txt ciphertext.txt"
@@ -225,6 +252,9 @@ cat ciphertext.txt
 
 echo "decripted ciphertext:"
 cat plaintext.txt
+
+# clean up files
+rm ciphertext.txt plaintext.txt
 
 echo -e "\n"
 echo "Test case 45: railfence cipher"
@@ -248,6 +278,9 @@ cat ciphertext.txt
 echo "decripted ciphertext:"
 cat plaintext.txt
 
+# clean up files
+rm ciphertext.txt plaintext.txt
+
 echo -e "\n"
 echo "Test case 46: railfence cipher"
 echo "./cipher RFC 100 ENC short_input_file.txt ciphertext.txt"
@@ -269,6 +302,9 @@ cat ciphertext.txt
 
 echo "decripted ciphertext:"
 cat plaintext.txt
+
+# clean up files
+rm ciphertext.txt plaintext.txt
 
 echo -e "\n"
 echo "Test case 48: row transposition cipher"
@@ -292,6 +328,10 @@ cat ciphertext.txt
 echo "decripted ciphertext:"
 cat plaintext.txt
 
+# clean up files
+rm ciphertext.txt plaintext.txt
+rm .rowtransposition_fillers
+
 echo -e "\n"
 echo "Test case 50: row transposition cipher"
 echo "./cipher RTS @ecs12K# ENC short_input_file.txt ciphertext.txt"
@@ -313,6 +353,10 @@ cat ciphertext.txt
 
 echo "decripted ciphertext:"
 cat plaintext.txt
+
+# clean up files
+rm ciphertext.txt plaintext.txt
+rm .rowtransposition_fillers
 
 echo -e "\n"
 echo "Test case 52: row transposition cipher"
@@ -338,6 +382,34 @@ cat plaintext.txt
 
 # clean up files
 rm ciphertext.txt plaintext.txt
+rm .rowtransposition_fillers
+
+
+echo -e "\n"
+echo "Test case 60: row transposition cipher"
+echo "./cipher RTS abcdefghifjklmnopqrstuvwxyz ENC short_input_file.txt ciphertext.txt"
+./cipher RTS abcdefghijklmnopqrstuvwxyz ENC short_input_file.txt ciphertext.txt
+
+echo "short input file:"
+cat short_input_file.txt
+
+echo "ciphertext:"
+cat ciphertext.txt
+
+echo -e "\n"
+echo "Test case 61: row transposition cipher"
+echo "./cipher RTS abcdefghifjklmnopqrstuvwxyz DEC ciphertext.txt plaintext.txt"
+./cipher RTS abcdefghijklmnopqrstuvwxyz DEC ciphertext.txt plaintext.txt
+
+echo "ciphertext:"
+cat ciphertext.txt
+
+echo "decripted ciphertext:"
+cat plaintext.txt
+
+# clean up files
+rm ciphertext.txt plaintext.txt
+rm .rowtransposition_fillers
 
 echo -e "\n"
 echo "Test case 54: playfair cipher"
@@ -363,6 +435,7 @@ cat plaintext.txt
 
 # clean up files
 rm ciphertext.txt plaintext.txt
+rm .playfair_padding_location
 
 echo -e "\n"
 echo "Test case 56: playfair cipher"
@@ -385,6 +458,10 @@ cat ciphertext.txt
 
 echo "decripted ciphertext:"
 cat plaintext.txt
+
+# clean up files
+rm ciphertext.txt plaintext.txt
+rm .playfair_padding_location
 
 echo -e "\n"
 echo "Test case 58: playfair cipher"
@@ -410,3 +487,30 @@ cat plaintext.txt
 
 # clean up files
 rm ciphertext.txt plaintext.txt
+rm .playfair_padding_location
+
+echo -e "\n"
+echo "Test case 62: playfair cipher"
+echo "./cipher PLF abcdefghijklmnopqrstuvwxyz ENC short_input_file.txt ciphertext.txt"
+./cipher PLF abcdefghijklmnopqrstuvwxyz ENC short_input_file.txt ciphertext.txt
+
+echo "short input file:"
+cat short_input_file.txt
+
+echo "ciphertext:"
+cat ciphertext.txt
+
+echo -e "\n"
+echo "Test case 63: playfair cipher"
+echo "./cipher PLF abcdefghijklmnopqrstuvwxyz DEC ciphertext.txt plaintext.txt"
+./cipher PLF abcdefghijklmnopqrstuvwxyz DEC ciphertext.txt plaintext.txt
+
+echo "ciphertext:"
+cat ciphertext.txt
+
+echo "decripted ciphertext:"
+cat plaintext.txt
+
+# clean up files
+rm ciphertext.txt plaintext.txt
+rm .playfair_padding_location
