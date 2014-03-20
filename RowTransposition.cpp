@@ -46,15 +46,16 @@ string RowTransposition::encrypt(const std::string& plaintext) {
 
   // we are assuming the plaintext contains only Engish letters
   // transform the input text to uppercase
-  string processed_plaintext = "";
+  //string processed_plaintext = "";
 
-  transform(plaintext.begin(),
-            plaintext.end(),
-            back_inserter(processed_plaintext),
-            ::toupper);
+  //transform(plaintext.begin(),
+  //          plaintext.end(),
+  //          back_inserter(processed_plaintext),
+  //          ::toupper);
 
   // pad the text
-  processed_plaintext = padText(processed_plaintext);
+  //processed_plaintext = padText(processed_plaintext);
+  string processed_plaintext = padText(plaintext);
 
   // construct the processed plaintext matrix
   vector<string> matrix = constructPlaintextMatrix(processed_plaintext);
@@ -123,10 +124,11 @@ string RowTransposition::decrypt(const std::string& ciphertext) {
     // if the input file stream is valid
     //  read the ciphertext and number of fillers 
     //  drop the fillers
-    if (!input_file) {
-      perror("open input file");
-    }
-    else {
+    //if (!input_file) {
+    //  perror("open input file");
+    //}
+    //else {
+    if (input_file) {
       string ciphertext_infile = "";
 
       // read the cipher text in file

@@ -296,7 +296,8 @@ BOOST_AUTO_TEST_CASE(test_encrypt1) {
   string ciphertext = rt_cipher.encrypt(plaintext);
 
   // check the encryption
-  BOOST_CHECK_EQUAL(ciphertext, "TTNAAPTMTSUOAODWCOIXKNLYPETZ");
+  //BOOST_CHECK_EQUAL(ciphertext, "TTNAAPTMTSUOAODWCOIXKNLYPETZ");
+  BOOST_CHECK_EQUAL(ciphertext, "ttnaaptmtsuoaodwcoixknlypetz");
 }
 
 BOOST_AUTO_TEST_CASE(test_encrypt2) {
@@ -403,7 +404,8 @@ BOOST_AUTO_TEST_CASE(test_decryption1) {
   string decrypted_ciphertext = rt_cipher.decrypt(ciphertext);
 
   //check the process of encryption and decryption
-  BOOST_CHECK_EQUAL(decrypted_ciphertext, "ATTACKPOSTPONEDUNTILTWOAM");
+  //BOOST_CHECK_EQUAL(decrypted_ciphertext, "ATTACKPOSTPONEDUNTILTWOAM");
+  BOOST_CHECK_EQUAL(decrypted_ciphertext, plaintext);
 }
 
 BOOST_AUTO_TEST_CASE(test_decryption2) {
