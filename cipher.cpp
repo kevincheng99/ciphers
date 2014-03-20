@@ -47,16 +47,6 @@ int main(int argc, char** argv)
     return -2;
   }
 
-  // initialize output file stream object
-  // warning that this will rewrite the file
-  ofstream output_file(argv[kOutputFile], ofstream::out);
-
-  // check the output file
-  if (!output_file) {
-    perror("open output file");
-    return -3;
-  }
-
   // read the text (plaintext or ciphertext) from a file into a string
   string text = "";
   
@@ -119,10 +109,6 @@ int main(int argc, char** argv)
   }
   else {
     cerr << "invalid cipher name: " << argv[kCipherName] << endl;
-                
-    // close output file stream object
-    output_file.close();
-
     return -4;
   }
 
@@ -138,11 +124,17 @@ int main(int argc, char** argv)
   
   if (!(cipher->setKey(mykey))) {
     cerr << "invalid key: " << mykey << endl;
-      
-    // close output file stream object
-    output_file.close();
-
     return -5;
+  }
+  
+  // initialize output file stream object
+  // warning that this will rewrite the file
+  ofstream output_file(argv[kOutputFile], ofstream::out);
+
+  // check the output file
+  if (!output_file) {
+    perror("open output file");
+    return -3;
   }
 
   // encryption or decryption
