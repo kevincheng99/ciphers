@@ -236,10 +236,11 @@ std::string Playfair::decrypt(const std::string& ciphertext) {
     ifstream input_file(".playfair_padding_location", ifstream::in);
 
     // check if the hidden file exists
-    if (!input_file) {
-      perror("open input file");
-    }
-    else {
+    //if (!input_file) {
+    //  perror("open input file");
+    //}
+    //else {
+    if (input_file) {
       string ciphertext_infile = "";
 
       // read the ciphertext in the file
