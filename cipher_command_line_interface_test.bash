@@ -264,4 +264,4 @@ cat plaintext.txt
 # clean up files
 rm ciphertext.txt plaintext.txt
 rm .playfair_padding_location .rowtransposition_fillers
-
+rm delete_me.txt
