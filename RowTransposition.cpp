@@ -44,6 +44,12 @@ bool RowTransposition::setKey(const std::string& mykey)
 string RowTransposition::encrypt(const std::string& plaintext) {
   using namespace std;
 
+  // the key length should not be greater than the plaintext length
+  if (rank_key.size() > plaintext.length()) {
+    cerr << "WARNING: The key lenght is longer than the length of plaintext" << endl;
+    cerr << "WARNING: The encryption may not be desired" << endl;
+  }
+
   // we are assuming the plaintext contains only Engish letters
   // transform the input text to uppercase
   //string processed_plaintext = "";
