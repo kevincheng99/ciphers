@@ -307,7 +307,8 @@ bool Playfair::validateKey(const string& user_key) {
   for (string::const_iterator itr = user_key.begin();
        itr != user_key.end();
        itr++) {
-    if (isupper(*itr) == false && islower(*itr) == false) {
+    //if (isupper(*itr) == false && islower(*itr) == false) {
+    if (isalpha(*itr) == false) {
       cerr << "ERROR: key has to be English letters in ASCII" << endl;
       return false;
     }
@@ -649,7 +650,8 @@ std::string Playfair::extractNonEnglishLetters(const std::string& text) {
   //  else 
   //    store the value in the processed string
   for (size_t i = 0; i < text.length(); i++) {
-    if (isupper(text.at(i)) == false && islower(text.at(i)) == false) {
+    //if (isupper(text.at(i)) == false && islower(text.at(i)) == false) {
+    if (isalpha(*itr) == false) {
       pair<size_t, char> letter_location = make_pair(i, text.at(i));
       
       nonenglish_letter_location.push_back(letter_location);
