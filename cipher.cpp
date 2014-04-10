@@ -10,6 +10,8 @@
 #include "Caesar.h"
 #include "Vigenere.h"
 #include "Railfence.h"
+#include "DES.h"
+#include "RSA.h"
 
 using namespace std;
 
